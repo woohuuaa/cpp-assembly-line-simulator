@@ -18,7 +18,7 @@
     <ClCompile Include="FoodOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="w1_p1.cpp">
+    <ClCompile Include="w1_p2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,3 +1,13 @@
+////////////////////////////////////////////////////////////////////////////
+//	  																      //
+// Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
+//							Date: 2024-05-19							  //
+// ---------------------------------------------------------------------- //
+// I declare that this submission is the result of my own work and only   //
+// copied the code that my professor provided to complete my workshops	  //
+// and assignments. This submitted piece of work has not been shared with //
+// any other student or 3rd party content provider.						  //	 																      //
+////////////////////////////////////////////////////////////////////////////
 #define _CRT_SECURE_NO_WARNINGS
 #include "FoodOrder.h"
 #include <iostream>
@@ -8,22 +18,54 @@ double g_taxrate{};
 double g_dailydiscount{};
 namespace seneca
 {
+	void FoodOrder::setfoodDesc(char*& des, const char* src)
+	{
+		delete[] des;
+		if (src) {
+			des = new char[strlen(src) + 1];
+			strcpy(des, src);
+		}
+	}
 	FoodOrder::FoodOrder() {}
+
+	FoodOrder::FoodOrder(const FoodOrder& rhs)
+	{
+		operator=(rhs);
+	}
+
+	FoodOrder& FoodOrder::operator=(const FoodOrder& rhs)
+	{
+		// TODO: insert return statement here
+		if (this != &rhs)
+		{
+			strcpy(m_customerName, rhs.m_customerName);
+			setfoodDesc(m_foodDesc, rhs.m_foodDesc);
+			m_price = rhs.m_price;
+			m_dailySpecial = rhs.m_dailySpecial;
+		}
+		return *this;
+	}
+
+	FoodOrder::~FoodOrder()
+	{
+		delete[] m_foodDesc;
+	}
 
 	std::istream& seneca::FoodOrder::read(std::istream& istr)
 	{
 		// TODO: insert return statement here
-		if (!std::cin.fail())
+		if (!istr.fail())
 		{
 			char tmpName[11]{};
-			char tmpDesc[26]{};
+			string tmpDesc;
 			double tmpPrice{};
 			char tmpSpecial{};
 			istr.getline(tmpName, 10, ',');
 			strcpy(m_customerName, tmpName);
 
-			istr.getline(tmpDesc, 25, ',');
-			strcpy(m_foodDesc, tmpDesc);
+			getline(istr, tmpDesc, ',');
+			m_foodDesc = new char[tmpDesc.length() + 1];
+			strcpy(m_foodDesc, tmpDesc.c_str());
 
 			istr >> tmpPrice;
 			istr.ignore();
@@ -39,7 +81,6 @@ namespace seneca
 	std::ostream& seneca::FoodOrder::display(std::ostream& ostr) const
 	{
 		static int counter{};
-		// TODO: insert return statement here
 		counter++;
 		ostr.width(2);
 		ostr.setf(ios::left);

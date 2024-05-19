@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FoodOrder.cpp" />
-    <ClCompile Include="w1_p1.cpp" />
+    <ClCompile Include="w1_p2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FoodOrder.h" />

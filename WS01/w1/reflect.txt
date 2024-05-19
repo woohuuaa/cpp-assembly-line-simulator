@@ -1,0 +1,21 @@
+////////////////////////////////////////////////////////////////////////////
+//	  	   						      	  //
+// Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
+//			   Date: 2024-05-19				  //
+// ---------------------------------------------------------------------- //
+// I declare that this submission is the result of my own work and only   //
+// copied the code that my professor provided to complete my workshops	  //
+// and assignments. This submitted piece of work has not been shared with //
+// any other student or 3rd party content provider.			  //	 								
+////////////////////////////////////////////////////////////////////////////
+
+In workshop 1, we learned:
+1. How to receive program arguments from the command line using syntax: int main(int argc, char* argv[])
+2. How to access a variable defined in a different translation unit using "extern" keyword. 
+   The "extern" keyword identifies external linkage. We declared two variable using syntax "extern double g_taxrate; extern double g_dailydiscount;" in FoodOrder.h, and defined them in FoodOrder.cpp file. This makes "g_taxrate" and "g_dailydiscount" accessible by another translation unit. As a result, in w1p1.cpp and w1p2.cpp, the main function can directly access the same entities g_taxrate and g_dailydiscount declared in FoodOrder module and assign values to them. 
+3. How to declare a local variable that resides in memory throughout the lifetime of the program using static variable.
+   Static keyword identifies internal linkage. We declared a counter in FoodOrder module using syntax: static int counter{};. The counter is not invisible to other modules like w1p1.cpp and w1p2.cpp but is visible within FoodOrder module. "static" makes "counter" variable resides in memory throughout the lifetime of the program. When FoodOrder::display(std::ostream& ostr) const function was called in w1p1.cpp and w1p2.cpp, the counter will add 1. Although the counter was declared in display function, the same variable will last and will not be defined again, adding 1 on to the value every time the function was called. This makes static variables "counter" useful in my solution because it uses a single memory allocation to accumulate the orders every time the display function was called that improves memory efficiency. We achieved this effect without declaring a global variable that helped in organizing the code.
+   The biggest different between internal linkage and external linkage is that the variable identified as internal linkage is not accessible by a different translation unit from which it was declared. However, external linkage variable can be accessible by different translation unit.
+
+4. To achieve the requirement in part 2, I upgraded the data member m_foodDesc in my FoodOrder class as a char* to dynamically accept "C-style null-terminated string of any length". To implement DMA, we need to apply rule of three. I added a copy constructor "FoodOrder(const FoodOrder& rhs)", a copy assignment "FoodOrder& operator=(const FoodOrder& rhs);" and a destructor "~FoodOrder();" to my solution. To improve readability, I encapsulate DMA copying process into "setfoodDesc" to copy food description from one to another.
+In the FoodOrder::read(std::istream& istr) function, we need to update reading the food description to a string variable: string tmpDesc; and use getline(istr, tmpDesc, ','); to read from file. Additionally, we need to implement dynamic allocation using syntax: m_foodDesc = new char[tmpDesc.length() + 1]; to allocate memory for data member m_foodDesc, so that we can copy the food description read to data member using syntax: strcpy(m_foodDesc, tmpDesc.c_str());. tmpDesc.c_str() returns a pointer to a null-terminated character array with data equivalent to those stored in the string that make strcpy function works.

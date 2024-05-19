@@ -5,7 +5,7 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>day1.txt day2.txt</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>day1.txt missing.txt day2.txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
