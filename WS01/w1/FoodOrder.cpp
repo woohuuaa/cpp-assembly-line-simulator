@@ -57,27 +57,30 @@ namespace seneca
 		if (istr.good())
 		{
 			char tmpName[11]{};
-			string tmpDesc;
+			string tmpDesc{};
 			double tmpPrice{};
 			char tmpSpecial{};
 			istr.getline(tmpName, 10, ',');
-			if (strlen(tmpName))
+			strcpy(m_customerName, tmpName);
+
+			getline(istr, tmpDesc, ',');
+			if (!m_foodDesc)
 			{
-				strcpy(m_customerName, tmpName);
-
-				getline(istr, tmpDesc, ',');
-				if (tmpDesc.length())
 				m_foodDesc = new char[tmpDesc.length() + 1];
-				strcpy(m_foodDesc, tmpDesc.c_str());
-
-				istr >> tmpPrice;
-				istr.ignore();
-				m_price = tmpPrice;
-
-				istr >> tmpSpecial;
-				m_dailySpecial = tmpSpecial;
-				istr.ignore();
 			}
+			else if (tmpDesc.length() > strlen(m_foodDesc)) {
+				delete[] m_foodDesc;
+				m_foodDesc = new char[tmpDesc.length() + 1];
+			}
+			strcpy(m_foodDesc, tmpDesc.c_str());
+
+			istr >> tmpPrice;
+			istr.ignore();
+			m_price = tmpPrice;
+
+			istr >> tmpSpecial;
+			m_dailySpecial = tmpSpecial;
+			istr.ignore();
 		}
 		return istr;
 	}

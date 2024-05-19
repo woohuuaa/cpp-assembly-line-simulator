@@ -21,7 +21,6 @@ namespace seneca {
 	class FoodOrder
 	{
 		char m_customerName[11]{};
-		// char* m_foodDesc{};
 		char* m_foodDesc{};
 		double m_price{};
 		char m_dailySpecial{};
