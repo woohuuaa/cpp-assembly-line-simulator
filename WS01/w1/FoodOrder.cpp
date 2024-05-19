@@ -54,26 +54,30 @@ namespace seneca
 	std::istream& seneca::FoodOrder::read(std::istream& istr)
 	{
 		// TODO: insert return statement here
-		if (!istr.fail())
+		if (istr.good())
 		{
 			char tmpName[11]{};
 			string tmpDesc;
 			double tmpPrice{};
 			char tmpSpecial{};
 			istr.getline(tmpName, 10, ',');
-			strcpy(m_customerName, tmpName);
+			if (strlen(tmpName))
+			{
+				strcpy(m_customerName, tmpName);
 
-			getline(istr, tmpDesc, ',');
-			m_foodDesc = new char[tmpDesc.length() + 1];
-			strcpy(m_foodDesc, tmpDesc.c_str());
+				getline(istr, tmpDesc, ',');
+				if (tmpDesc.length())
+				m_foodDesc = new char[tmpDesc.length() + 1];
+				strcpy(m_foodDesc, tmpDesc.c_str());
 
-			istr >> tmpPrice;
-			istr.ignore();
-			m_price = tmpPrice;
+				istr >> tmpPrice;
+				istr.ignore();
+				m_price = tmpPrice;
 
-			istr >> tmpSpecial;
-			m_dailySpecial = tmpSpecial;
-			istr.ignore();
+				istr >> tmpSpecial;
+				m_dailySpecial = tmpSpecial;
+				istr.ignore();
+			}
 		}
 		return istr;
 	}
