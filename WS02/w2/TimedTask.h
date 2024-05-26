@@ -8,7 +8,6 @@
 // and assignments. This submitted piece of work has not been shared with //
 // any other student or 3rd party content provider.						  //	 																      //
 ////////////////////////////////////////////////////////////////////////////
-#pragma once
 #ifndef _SENECA_TIMEDTASK_H
 #define _SENECA_TIMEDTASK_H
 #include <iostream>
