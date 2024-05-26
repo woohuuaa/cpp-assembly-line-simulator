@@ -26,7 +26,7 @@ namespace seneca {
 	}
 	std::ostream& operator<<(std::ostream& ostr, TimedTask t)
 	{
-		ostr << "--------------------------\nExecution Times :\n--------------------------\n";
+		ostr << "--------------------------\nExecution Times:\n--------------------------\n";
 		for (size_t i = 0; i < t.m_currentRecords; i++)
 		{
 			t.m_taskArr[i].display(ostr);
