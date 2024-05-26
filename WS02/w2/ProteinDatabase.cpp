@@ -67,6 +67,40 @@ namespace seneca {
 		}
 		return *this;
 	}
+	ProteinDatabase::ProteinDatabase(ProteinDatabase&& src) /*: m_proteinSequence(std::move(src.m_proteinSequence)), m_size(src.m_size)*/
+	{
+		*this = std::move(src);
+		//src.m_proteinSequence = nullptr;
+		//src.m_size = 0;
+	}
+	ProteinDatabase& ProteinDatabase::operator=(ProteinDatabase&& src)
+	{
+		if (this != &src)
+		{
+			// 1. check for self-assignment
+			if (src)
+			{
+				// 2. clean-up the resource used by the current instance
+				delete[] m_proteinSequence;
+				m_proteinSequence = nullptr;
+				// 3. shallow copy
+				m_size = src.m_size;
+				// 4. move the resource from parameter into current instance
+				// copy address to current object
+				m_proteinSequence = src.m_proteinSequence;
+
+				src.m_proteinSequence = nullptr;
+				src.m_size = 0;
+			}
+			else
+			{
+				delete[] m_proteinSequence;
+				m_proteinSequence = nullptr;
+				m_size = 0;
+			}
+		}
+		return *this;
+	}
 	ProteinDatabase::~ProteinDatabase()
 	{
 		delete[] m_proteinSequence;

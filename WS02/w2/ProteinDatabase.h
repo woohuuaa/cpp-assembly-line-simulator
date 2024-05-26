@@ -38,6 +38,17 @@ namespace seneca {
 		/// <returns></returns>
 		ProteinDatabase& operator=(const ProteinDatabase& src);
 		/// <summary>
+		/// move constructor
+		/// </summary>
+		/// <param name="src"></param>
+		ProteinDatabase(ProteinDatabase&& src);
+		/// <summary>
+		/// move assignment
+		/// </summary>
+		/// <param name="src"></param>
+		/// <returns></returns>
+		ProteinDatabase& operator=(ProteinDatabase&& src);
+		/// <summary>
 		/// destructor
 		/// </summary>
 		virtual ~ProteinDatabase();

@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="w2_p1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TimedTask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ProteinDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="w2_p2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

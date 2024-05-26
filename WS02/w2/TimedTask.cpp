@@ -49,9 +49,8 @@ namespace seneca {
 	}
 	std::ostream& Task::display(std::ostream& ostr) const
 	{
-		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(m_duration).count();
 		ostr << std::left << std::setw(20) << m_mame;
-		ostr << std::right << std::setw(13) << duration;
+		ostr << std::right << std::setw(13) << m_duration.count();
 		ostr << std::setw(13) << m_unit << '\n';
 		return ostr;
 	}

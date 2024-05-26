@@ -1,0 +1,31 @@
+////////////////////////////////////////////////////////////////////////////
+//	  	   						      	  //
+// Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
+//			   Date: 2024-05-26				  //
+// ---------------------------------------------------------------------- //
+// I declare that this submission is the result of my own work and only   //
+// copied the code that my professor provided to complete my workshops	  //
+// and assignments. This submitted piece of work has not been shared with //
+// any other student or 3rd party content provider.			  //
+//	 								  //
+////////////////////////////////////////////////////////////////////////////
+
+In workshop 2, we learned:
+1. How to retrieve records and from a text file using ifstream with syntax: std::ifstream file(filename);
+2. Hoe to count the number of records in a text file:
+	We use file.get(); to scan over the file and find character '>' to count the number of protein sequences.
+	We use file.clear(); to clear the error flags (in this case, it reached end-of-file) and used file.seekg(0); to move the pointer back to the start of the file and allow us to re-read the file.
+	We use std::getline(file, buffer) to read every line (getline stopped when encountered '\n') in the file and store the protein sequences to the string array when we encountered every '>'.
+
+3. How to monitor the time spent on a particular task using the std::chrono library
+	We use syntax: m_startTime = std::chrono::steady_clock::now(); to set the start time and use m_endTime = std::chrono::steady_clock::now(); to set the end time of the task. When doing tasks, in w2p2, t.startClock(); starts the clock and then perform certain task, and t.stopClock(); when the task ends to count the time, and then store the duration of task using std::chrono::duration cast<std::chrono::nanoseconds>() into a Task array.
+	When we need to display the duration, we need to use m_duration.count() to return the number to display.
+
+4. How to implement copy semantics and move semantics for a class with a resource
+	We already learned rule of three- Copy Constructor, Copy Assignment, Destructor in OOP244. If the class has a resource, we need to implement these three things in order to perfectly control the resources. In this workshop, we need to implement rule of five-add Move Constructor and Move Assignment on top of rule three. It takes form: ProteinDatabase(ProteinDatabase&& src); and ProteinDatabase& operator=(ProteinDatabase&& src);. Unlike Copy Constructor, Copy Assignment, we cannot set src to be const because we need to set the source to an empty state after moving all the resources and data to current object. && identifies the source object near the end of its lifetime. 
+
+5. The reason for the significant time difference between the copy and move operations is that copy operations actually allocate a new memory space and copy all resources from the source to the current object, but move operations doesn't actually "move" all the resources but only copy the address of the source and set the original source into empty and safe state. For example, when it comes to an array of 20000+ elements, copy operations need to allocate new memory and copy every elements in the sources array to the array in current object, however, move operations only need to copy the address of the array to the current object and then set the original array pointer to nullptr. Current object takes the memory region of the original array and use it directly. When we look at the time difference between 2 operations, we can see how significant it is:
+  Copy Constructor       25094000  nanoseconds
+  Copy Assignment        27066100  nanoseconds
+  Move Constructor            400  nanoseconds
+  Move Assignment             300  nanoseconds 

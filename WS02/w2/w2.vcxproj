@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClCompile Include="ProteinDatabase.cpp" />
     <ClCompile Include="TimedTask.cpp" />
-    <ClCompile Include="w2_p1.cpp" />
+    <ClCompile Include="w2_p2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="proteinsequences.txt" />
