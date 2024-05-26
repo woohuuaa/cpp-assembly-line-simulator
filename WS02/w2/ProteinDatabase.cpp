@@ -67,11 +67,11 @@ namespace seneca {
 		}
 		return *this;
 	}
-	ProteinDatabase::ProteinDatabase(ProteinDatabase&& src) /*: m_proteinSequence(std::move(src.m_proteinSequence)), m_size(src.m_size)*/
+	ProteinDatabase::ProteinDatabase(ProteinDatabase&& src) : m_proteinSequence(std::move(src.m_proteinSequence)), m_size(src.m_size)
 	{
-		*this = std::move(src);
-		//src.m_proteinSequence = nullptr;
-		//src.m_size = 0;
+		//*this = std::move(src);
+		src.m_proteinSequence = nullptr;
+		src.m_size = 0;
 	}
 	ProteinDatabase& ProteinDatabase::operator=(ProteinDatabase&& src)
 	{
