@@ -8,8 +8,8 @@
 // and assignments. This submitted piece of work has not been shared with //
 // any other student or 3rd party content provider.						  //	 																      //
 ////////////////////////////////////////////////////////////////////////////
-#ifndef _SENECA_TIMEDTASK_H
-#define _SENECA_TIMEDTASK_H
+#ifndef SENECA_TIMEDTASK_H
+#define SENECA_TIMEDTASK_H
 #include <iostream>
 #include <chrono>
 namespace seneca {

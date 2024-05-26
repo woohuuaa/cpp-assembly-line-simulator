@@ -8,8 +8,8 @@
 // and assignments. This submitted piece of work has not been shared with //
 // any other student or 3rd party content provider.						  //	 																      //
 ////////////////////////////////////////////////////////////////////////////
-#ifndef _SENECA_PROTEINDATABASE_H
-#define _SENECA_PROTEINDATABASE_H
+#ifndef SENECA_PROTEINDATABASE_H
+#define SENECA_PROTEINDATABASE_H
 #include <iostream>
 #include <fstream>
 #include <string>
