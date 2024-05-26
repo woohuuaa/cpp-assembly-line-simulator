@@ -1,2 +1,5 @@
 ﻿  ProteinDatabase.cpp
-  w2.vcxproj -> C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS02\w2\x64\Debug\w2.exe
+  TimedTask.cpp
+  w2_p1.cpp
+  Generating Code...
+C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS02\w2\TimedTask.cpp(1,1): error C1090: PDB API call failed, error code '3': C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS02\w2\w2\x64\Debug\vc143.pdb

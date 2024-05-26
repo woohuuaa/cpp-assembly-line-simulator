@@ -8,7 +8,8 @@
 // and assignments. This submitted piece of work has not been shared with //
 // any other student or 3rd party content provider.						  //	 																      //
 ////////////////////////////////////////////////////////////////////////////
-#pragma once
+#ifndef _SENECA_PROTEINDATABASE_H
+#define _SENECA_PROTEINDATABASE_H
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -58,3 +59,5 @@ namespace seneca {
 		std::string operator[](size_t index);
 	};
 }
+
+#endif // _SENECA_PROTEINDATABASE_H

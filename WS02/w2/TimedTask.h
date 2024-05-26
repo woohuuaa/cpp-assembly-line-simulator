@@ -9,6 +9,8 @@
 // any other student or 3rd party content provider.						  //	 																      //
 ////////////////////////////////////////////////////////////////////////////
 #pragma once
+#ifndef _SENECA_TIMEDTASK_H
+#define _SENECA_TIMEDTASK_H
 #include <iostream>
 #include <chrono>
 namespace seneca {
@@ -31,7 +33,7 @@ namespace seneca {
 		/// <summary>
 		/// to set data member m_duration
 		/// </summary>
-		/// <param name="duration">a duration object to set duration                     </param>
+		/// <param name="duration">a duration object to set duration</param>
 		void setDuration(std::chrono::steady_clock::duration duration);
 		/// <summary>
 		/// to display Task object
@@ -73,5 +75,5 @@ namespace seneca {
 		/// <returns>ostream object</returns>
 		friend std::ostream& operator<<(std::ostream& ostr, TimedTask t);
 	};
-	// timetook = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time)
 }
+#endif // _SENECA_TIMEDTASK_H

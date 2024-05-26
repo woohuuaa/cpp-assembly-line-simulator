@@ -1,5 +1,4 @@
 #include "ProteinDatabase.h"
-
 namespace seneca {
 	seneca::ProteinDatabase::ProteinDatabase(){}
 	seneca::ProteinDatabase::ProteinDatabase(std::string filename)
