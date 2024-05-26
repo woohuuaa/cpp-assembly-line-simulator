@@ -31,6 +31,7 @@ namespace seneca {
 		{
 			t.m_taskArr[i].display(ostr);
 		}
+		ostr << "--------------------------\n";
 		return ostr;
 	}
 	// Task member functions
