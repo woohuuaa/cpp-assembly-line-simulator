@@ -59,8 +59,8 @@ namespace seneca {
 		{
 			os << std::right << std::setw(56) 
 				<< (m_title + ',' + std::to_string(m_numChapters) + ',' + std::to_string(m_numPages))
-				<< std::left << std::setw(15) 
-				<< " | (" + std::to_string(static_cast<double>(m_numPages) / m_numChapters) + ')';
+				<< " | " << std::left << std::setw(15)
+				<< '(' + std::to_string(static_cast<double>(m_numPages) / m_numChapters) + ')';
 		}
 		else
 		{
