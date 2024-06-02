@@ -18,6 +18,7 @@ namespace seneca {
 	{
 		std::string* m_proteinSequence{};
 		size_t m_size{};
+		void setEmpty();
 	public:
 		ProteinDatabase();
 		/// <summary>
@@ -67,7 +68,7 @@ namespace seneca {
 		/// a copy of the protein sequence at the index, 
 		/// If the index is invalid, this function should return an empty string.
 		/// </returns>
-		std::string operator[](size_t index);
+		std::string operator[](size_t index) const;
 	};
 }
 

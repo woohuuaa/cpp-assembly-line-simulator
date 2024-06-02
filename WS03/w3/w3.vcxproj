@@ -128,8 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
-    <ClCompile Include="Collection.cpp" />
-    <ClCompile Include="w3_p1.cpp" />
+    <ClCompile Include="w3_p2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="notes.txt" />
@@ -138,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="Collection.h" />
+    <ClInclude Include="OrderedCollection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

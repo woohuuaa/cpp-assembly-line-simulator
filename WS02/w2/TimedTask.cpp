@@ -24,7 +24,7 @@ namespace seneca {
 			++m_currentRecords;
 		}
 	}
-	std::ostream& operator<<(std::ostream& ostr, TimedTask t)
+	std::ostream& operator<<(std::ostream& ostr, const TimedTask t)
 	{
 		ostr << "--------------------------\nExecution Times:\n--------------------------\n";
 		for (size_t i = 0; i < t.m_currentRecords; i++)

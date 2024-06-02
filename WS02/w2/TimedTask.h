@@ -72,7 +72,7 @@ namespace seneca {
 		/// <param name="istr"></param>
 		/// <param name="t"></param>
 		/// <returns>ostream object</returns>
-		friend std::ostream& operator<<(std::ostream& ostr, TimedTask t);
+		friend std::ostream& operator<<(std::ostream& ostr, const TimedTask t);
 	};
 }
 #endif // _SENECA_TIMEDTASK_H

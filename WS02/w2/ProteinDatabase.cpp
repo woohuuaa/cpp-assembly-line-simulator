@@ -1,5 +1,11 @@
 #include "ProteinDatabase.h"
 namespace seneca {
+	void ProteinDatabase::setEmpty()
+	{
+		delete[] m_proteinSequence;
+		m_proteinSequence = nullptr;
+		m_size = 0;
+	}
 	seneca::ProteinDatabase::ProteinDatabase(){}
 	seneca::ProteinDatabase::ProteinDatabase(std::string filename)
 	{
@@ -60,9 +66,7 @@ namespace seneca {
 			}
 			else
 			{
-				delete[] m_proteinSequence;
-				m_proteinSequence = nullptr;
-				m_size = 0;
+				setEmpty();
 			}
 		}
 		return *this;
@@ -94,9 +98,7 @@ namespace seneca {
 			}
 			else
 			{
-				delete[] m_proteinSequence;
-				m_proteinSequence = nullptr;
-				m_size = 0;
+				setEmpty();
 			}
 		}
 		return *this;
@@ -113,7 +115,7 @@ namespace seneca {
 	{
 		return m_size;
 	}
-	std::string seneca::ProteinDatabase::operator[](size_t index)
+	std::string seneca::ProteinDatabase::operator[](size_t index) const
 	{
 		std::string copy{};
 		if (index < m_size)

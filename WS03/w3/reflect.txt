@@ -1,0 +1,36 @@
+////////////////////////////////////////////////////////////////////////////
+//	  								  //
+// Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
+//			   Date: 2024-05-30				  //
+// ---------------------------------------------------------------------- //
+// I declare that this submission is the result of my own work and only   //
+// copied the code that my professor provided to complete my workshops	  //
+// and assignments. This submitted piece of work has not been shared with //
+// any other student or 3rd party content provider.			  //	 						
+////////////////////////////////////////////////////////////////////////////
+
+design and code a class template
+template a class variable
+specialize a templated class variable for a particular type
+instantiate a template class
+specialize a member function of a templated class to process a particular type
+derive a templated class from another templated class
+
+What is the reason for defining the class objects outside the class definition?
+What is the reason for specializing the definition of m_smallestItem and m_largestItem objects for Book and 10.
+m_smallestItem and m_largestItem objects are also initialized for Book and 72. Is this initilization necessary? Why?
+answers to the other questions in these specifications.
+
+Both class definitions and implementations of the Collection and OrderedCollection modules must be included on in header file, not in .cpp file. 🗎 In reflection explain: Why the definitions and implementations in this case should be included in header file? Are there ways to work around and include implementation in .cpp files?
+
+
+🗎 In reflection, explain why it was necessary for you to add the members that you added into the Book class.
+
+
+🗎 In reflection, explain why these functions cannot be querries, even though they do not change value.
+Static member functions do not have a this pointer, and they cannot be made const because they do not operate on an instance of the class. Instead, they operate on the class itself
+
+
+operator[](): a mutator operator to receive an array index and return corresponding element from m_items array. 
+🗎 In reflection, discuss if we can make this function a query or not (do an experiment and discuss your results).
+
