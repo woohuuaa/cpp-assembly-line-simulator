@@ -38,7 +38,6 @@ namespace seneca {
 		Book& operator=(const Book& src);
 		bool operator>(const Book& src) const;
 		bool operator<(const Book& src) const;
-		//bool operator==(const Book& src) const;
 		//
 		// Write the implementations of these functions 
 		// in Book.cpp file

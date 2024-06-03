@@ -39,11 +39,6 @@ namespace seneca {
 		return m_pageToChap < src.m_pageToChap;
 	}
 
-	//bool Book::operator==(const Book& src) const
-	//{
-	//	return (src && (m_title == src.m_title) && (m_numChapters == src.m_numChapters) && (m_numPages == src.m_numPages) && (m_pageToChap == src.m_pageToChap));
-	//}
-
 	Book::operator bool() const
 	{
 		return m_title.length();

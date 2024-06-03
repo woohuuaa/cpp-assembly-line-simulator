@@ -53,7 +53,6 @@ namespace seneca {
 		std::ostream& print(std::ostream& ostr) const;
 	};
 
-	//  trying different syntax for initialization
 	template<typename T, unsigned int C>
 	T Collection<T, C>::m_smallestItem{ 9999 };
 
