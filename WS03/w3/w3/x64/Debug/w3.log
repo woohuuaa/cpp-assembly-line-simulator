@@ -1,4 +1,49 @@
-﻿  Book.cpp
-  w3_p2.cpp
-  Generating Code...
-  w3.vcxproj -> C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\x64\Debug\w3.exe
+﻿  w3_p2.cpp
+C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(58,36): error C2440: 'initializing': cannot convert from 'initializer list' to 'seneca::Book'
+  (compiling source file 'w3_p2.cpp')
+  C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(58,36):
+  'seneca::Book::Book': no overloaded function could convert all the argument types
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Book.h(48,2):
+  	could be 'seneca::Book::Book(const seneca::Book &)'
+  		C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(58,36):
+  		'seneca::Book::Book(const seneca::Book &)': cannot convert argument 1 from 'int' to 'const seneca::Book &'
+  			C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(58,38):
+  			Reason: cannot convert from 'int' to 'const seneca::Book'
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(58,36):
+  	while trying to match the argument list '(int)'
+  C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(58,36):
+  the template instantiation context (the oldest one first) is
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(191,48):
+  	see reference to class template instantiation 'seneca::Collection<seneca::Book,72>' being compiled
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(119,33):
+  	while compiling class template member function 'seneca::Collection<seneca::Book,72>::Collection(void)'
+  		C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\OrderedCollection.h(23,1):
+  		see the first reference to 'seneca::Collection<seneca::Book,72>::Collection' in 'seneca::OrderedCollection<seneca::Book>::OrderedCollection'
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(58,2):
+  	while compiling class template static data member 'T seneca::Collection<T,72>::m_smallestItem'
+          with
+          [
+              T=seneca::Book
+          ]
+  
+C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(61,35): error C2440: 'initializing': cannot convert from 'initializer list' to 'seneca::Book'
+  (compiling source file 'w3_p2.cpp')
+  C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(61,35):
+  'seneca::Book::Book': no overloaded function could convert all the argument types
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Book.h(48,2):
+  	could be 'seneca::Book::Book(const seneca::Book &)'
+  		C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(61,35):
+  		'seneca::Book::Book(const seneca::Book &)': cannot convert argument 1 from 'int' to 'const seneca::Book &'
+  			C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(61,38):
+  			Reason: cannot convert from 'int' to 'const seneca::Book'
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(61,35):
+  	while trying to match the argument list '(int)'
+  C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(61,35):
+  the template instantiation context (the oldest one first) is
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS03\w3\Collection.h(61,2):
+  	while compiling class template static data member 'T seneca::Collection<T,72>::m_largestItem'
+          with
+          [
+              T=seneca::Book
+          ]
+  

@@ -61,19 +61,19 @@ namespace seneca {
 	T Collection<T, C>::m_largestItem{ -9999 };
 
 	// Template Specializations
-	//// part 1
+	// part 1
 	template<>
 	Book Collection<Book, sizeS>::m_smallestItem{ "", 1, 10000 };
 
 	template<>
 	Book Collection<Book, sizeS>::m_largestItem{ "", 10000, 1 };
 
-	// part 2
-	template<>
-	Book Collection<Book, sizeL>::m_smallestItem{ "", 1, 10000 };
+	//// part 2
+	//template<>
+	//Book Collection<Book, sizeL>::m_smallestItem{ "", 1, 10000 };
 
-	template<>
-	Book Collection<Book, sizeL>::m_largestItem{ "", 10000, 1 };
+	//template<>
+	//Book Collection<Book, sizeL>::m_largestItem{ "", 10000, 1 };
 
 
 	template<typename T, unsigned int C>
