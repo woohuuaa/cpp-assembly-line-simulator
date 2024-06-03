@@ -36,7 +36,7 @@ namespace seneca {
 		/// <param name="index">an array index</param>
 		/// <returns>index corresponding element from m_items array</returns>
 		T& operator[](size_t index);
-		const T& operator[](size_t index) const;
+		//const T& operator[](size_t index) const;
 		/// <summary>
 		/// a mutator to increase by 1 the size count of elements stored in the collection
 		/// </summary>
@@ -68,12 +68,12 @@ namespace seneca {
 	template<>
 	Book Collection<Book, sizeS>::m_largestItem{ "", 10000, 1 };
 
-	//// part 2
-	//template<>
-	//Book Collection<Book, sizeL>::m_smallestItem{ "", 1, 10000 };
+	// part 2
+	template<>
+	Book Collection<Book, sizeL>::m_smallestItem{ "", 1, 10000 };
 
-	//template<>
-	//Book Collection<Book, sizeL>::m_largestItem{ "", 10000, 1 };
+	template<>
+	Book Collection<Book, sizeL>::m_largestItem{ "", 10000, 1 };
 
 
 	template<typename T, unsigned int C>
@@ -100,11 +100,11 @@ namespace seneca {
 		return m_items[index];
 	}
 
-	template<typename T, unsigned int C>
-	inline const T& Collection<T, C>::operator[](size_t index) const
-	{
-		return m_items[index];
-	}
+	//template<typename T, unsigned int C>
+	//inline const T& Collection<T, C>::operator[](size_t index) const
+	//{
+	//	return m_items[index];
+	//}
 
 	template<typename T, unsigned int C>
 	void Collection<T, C>::incrSize()
