@@ -17,6 +17,7 @@ specialize a member function of a templated class to process a particular type
 derive a templated class from another templated class
 
 What is the reason for defining the class objects outside the class definition?
+
 What is the reason for specializing the definition of m_smallestItem and m_largestItem objects for Book and 10.
 m_smallestItem and m_largestItem objects are also initialized for Book and 72. Is this initilization necessary? Why?
 answers to the other questions in these specifications.
@@ -25,12 +26,16 @@ Both class definitions and implementations of the Collection and OrderedCollecti
 
 
 🗎 In reflection, explain why it was necessary for you to add the members that you added into the Book class.
+Book& operator=(const Book& src);
+bool operator>(const Book& src) const;
+bool operator<(const Book& src) const;
+I added 3 necessary member functions into Book class because in OrderCollection module we need to compare the each type T(Book, in this case) element in m_items array and sort it in order. To achieve this, we need to overload operator=, operator> and operator> to realize array sorting.
 
-
-🗎 In reflection, explain why these functions cannot be querries, even though they do not change value.
-Static member functions do not have a this pointer, and they cannot be made const because they do not operate on an instance of the class. Instead, they operate on the class itself
-
+🗎 why static member functions cannot be querries
+When a non-static member function is declared with the const qualifier, it means that the function does not modify the state of the object. The const qualifier applies to the implicit "this" pointer, which points to the instance of the class.
+Static member functions do not have a "this" pointer, and they cannot be made const because they do not operate on an instance of the class. Instead, they operate on the class itself
 
 operator[](): a mutator operator to receive an array index and return corresponding element from m_items array. 
 🗎 In reflection, discuss if we can make this function a query or not (do an experiment and discuss your results).
-
+According to workshop requirement, we need to sort the m_items array using operator[](). 
+If I make this function a query, I cannot implement sorting function because I cannot assign value to a const object which is returned by operator[]().

@@ -26,7 +26,10 @@ namespace seneca {
 		// member prototypes that would be necessary for the 
 		// Collection module code and tester module w3_p1.cpp 
 		// to manage Book-type objects. 
-		// 
+		/// <summary>
+		/// check if the book object is in valid state
+		/// </summary>
+		operator bool() const;
 		// In completing Part 2, add here the missing 
 		// member prototypes that would be necessary for 
 		// OrderedCollection module code and tester module 
@@ -35,15 +38,11 @@ namespace seneca {
 		Book& operator=(const Book& src);
 		bool operator>(const Book& src) const;
 		bool operator<(const Book& src) const;
-		bool operator==(const Book& src) const;
+		//bool operator==(const Book& src) const;
 		//
 		// Write the implementations of these functions 
 		// in Book.cpp file
 		
-		/// <summary>
-		/// check if the book object is in valid state
-		/// </summary>
-		operator bool() const;
 		std::ostream& print(std::ostream& os) const;
 
 	};
