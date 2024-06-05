@@ -70,7 +70,7 @@ namespace seneca {
 			<< std::left << std::setw(20) << "<" + r.m_email + ">"
 			<< "    ";
 		if (r.m_hour >= 6 && r.m_hour <= 9) {
-			o << "Breakfest";
+			o << "Breakfast";
 		}
 		else if (r.m_hour >= 11 && r.m_hour <= 15) {
 			o << "Lunch";
