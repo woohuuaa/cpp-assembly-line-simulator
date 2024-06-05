@@ -36,11 +36,9 @@ namespace seneca {
 	{
 		int start = 0;
 		int end = res.find(':');
-		std::cout << end << '\n';
 
 		m_id = res.substr(start, end - start);
 		trimStr(m_id);
-		std::cout << "m_id: " << m_id << '\n';
 
 		start = end + 1;
 		end = res.find(',', start);
