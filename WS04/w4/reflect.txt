@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////
 //	  								  //
 // Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
-//			   Date: 2024-05-30				  //
+//			   Date: 2024-06-05				  //
 // ---------------------------------------------------------------------- //
 // I declare that this submission is the result of my own work and only   //
 // copied the code that my professor provided to complete my workshops	  //
@@ -9,39 +9,8 @@
 // any other student or 3rd party content provider.			  //	 						
 ////////////////////////////////////////////////////////////////////////////
 
-In workshop3, we designed and code a class template Collection with a derived class template OrderedCollection. The derived template class takes below form to specialized for Collection<T, 72> type:
-	template<typename T>
-	class OrderedCollection : public Collection<T, sizeL>
+design and code composition and aggregation class relationships
 
-In Collection, we designed two class variable using syntax: static T m_smallestItem; and static T m_largestItem; We specialized these variables for Book type and initialized to { "", 1, 10000 } using syntax: 	
-template<>
-Book Collection<Book, sizeS>::m_smallestItem{ "", 1, 10000 };
+use member functions of the string class to parse a string into tokens based on simple rules
 
-Additionally, we instantiated template classes and put the template definitions in Collection.h and OrderedCollection.h files. In Collection.h, we specialized a member function "print" for Collection<Book, 10> and Collection<Book, 72> types, using syntax: 
-template<>
-inline std::ostream& Collection<Book, size>::print(std::ostream& ostr) const
-The inline keyword tells the compiler that it can create multiple definitions of the function, as long as they are identical.
-
-🗎The reason for defining the class objects outside the class definition is to avoid unnecessary work by the compiler and reduce the number of files that need to be recompiled when implementation changes. When you #include one file into another file, the entire content of the included file becomes part of the file that includes it. If you put the implementation in header file, any changes you make to the implementation will affects the content of any .cpp files which include the header file thus they all have to be recompiled.
-
-🗎What is the reason for specializing the definition of m_smallestItem and m_largestItem objects for Book and 10.
-Book is a customized class and have multiple data members, it require different meaningful initial values for type-specific initialization. in order to initialize each class member, we have to specialize the definition of m_smallestItem and m_largestItem objects or the compiler won't be able to initialized these objects. Initializes m_smallestItem and m_largestItem with extreme values is to ensure they are correctly updated when real Book objects are added.
-
-🗎m_smallestItem and m_largestItem objects are also initialized for Book and 72. Is this initilization necessary? Why?
-Yes, or it won't be compiled. The derived class uses particular type Collection<T, 72>. The Collection class template is designed to handle collections of different sizes. Each specialization of the template (e.g., for sizes 10 and 72) is essentially treated as a distinct class by the compiler. Initializing m_smallestItem and m_largestItem for each size specialization ensures that the collection behaves correctly and consistently, regardless of its size.
-
-🗎 In reflection explain: Why the definitions and implementations in this case should be included in header file? Are there ways to work around and include implementation in .cpp files?
-It is because template instantiation happens at compile-time, and the compiler must see the full definition to generate the appropriate code for each instantiation. Hence, the definitions and implementations are often included in the header file to ensure the compiler has access to the necessary details for instantiation. 
-There are still ways to work around: 1) To include the implementation file (.cpp) in the header file. 2) Explicit instantiations of the template in .cpp file if we know all the types will be used.
-
-🗎 In reflection, explain why it was necessary for you to add the members that you added into the Book class.
-Book& operator=(const Book& src);
-bool operator>(const Book& src) const;
-bool operator<(const Book& src) const;
-I added 3 necessary member functions into Book class because in OrderCollection module we need to compare the each type T(Book, in this case) element in m_items array and sort it in order. To achieve this, we need to overload operator=, operator> and operator> to realize array sorting.
-
-🗎 why static member functions cannot be querries
-When a non-static member function is declared with the const qualifier, it means that the function does not modify the state of the object. The const qualifier applies to the implicit "this" pointer, which points to the instance of the class. Static member functions do not have a "this" pointer, and they cannot be made const because they do not operate on an instance of the class. Instead, they operate on the class itself
-
-🗎 In reflection, discuss if we can make operator[]() a query or not (do an experiment and discuss your results).
-No. According to workshop requirement, we need to sort the m_items array using operator[](). If I make this function a query, I cannot implement sorting function because I cannot assign value to a const object which is returned by operator[](). My sorting function (bubbleSort()) directly sorts the m_items array using the return value T& of operator[]() of Collection class, to access the original elements and sort it, hence I need a non-const mutator operator[]() to sort the array in my bubbleSort() function.
+design and code a class that manages a dynamically allocated array of pointers to objects

@@ -62,6 +62,11 @@ namespace seneca {
 		m_hour = std::stoi(res.substr(start));
 	}
 
+	Reservation::operator bool() const
+	{
+		return m_id.length();
+	}
+
 	std::ostream& operator<<(std::ostream& o, const Reservation& r)
 	{
 		o << "Reservation "

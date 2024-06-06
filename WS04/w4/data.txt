@@ -1,6 +1,6 @@
 # ID    : Name    ,             email, # of people, Day, Time
 #------------------------------------------------------------
-1234:	 John    ,  john@email.com  ,           2,   3,    5
+1234: John    ,  john@email.com  ,           2,   3,    5
 ab defghij: David   , david@email.com  ,          1 ,   4,    6
  RES-003 : Sara    , sara@email.com   ,         2  ,   5,    7
  RES-004: Ana     ,   ana@email.com  ,        1   ,   5 ,    8

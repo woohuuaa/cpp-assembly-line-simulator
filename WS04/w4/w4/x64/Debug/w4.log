@@ -1,7 +1,2 @@
-﻿  Reservation.cpp
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS04\w4\Reservation.cpp(38,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS04\w4\Reservation.cpp(44,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS04\w4\Reservation.cpp(49,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS04\w4\Reservation.cpp(54,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS04\w4\Reservation.cpp(58,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+﻿  Restaurant.cpp
   w4.vcxproj -> C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS04\w4\x64\Debug\w4.exe
