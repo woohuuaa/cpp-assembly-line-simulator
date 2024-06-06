@@ -2,7 +2,12 @@
 namespace seneca {
     void Restaurant::setEmpty()
     {
-        delete[] m_pReservations;
+        if (m_pReservations) {
+            for (size_t i = 0; i < m_numOfResv; ++i) {
+                delete m_pReservations[i];
+            }
+            delete[] m_pReservations;
+        }
         m_pReservations = nullptr;
         m_numOfResv = 0;
     }
@@ -77,10 +82,6 @@ namespace seneca {
     }
     Restaurant::~Restaurant()
     {
-        //for (size_t i = 0; i < m_numOfResv; i++)
-        //{
-        //    delete[] m_pReservations[i];
-        //}
         setEmpty();
     }
     size_t seneca::Restaurant::size()
