@@ -17,17 +17,17 @@ namespace seneca {
 	Book::Book(const std::string& title, unsigned nChapters, unsigned nPages) 
 		: m_title(title), m_numChapters(nChapters), m_numPages(nPages), m_pageToChap{ static_cast<double>(m_numPages) / m_numChapters }
 	{ }
-	Book& Book::operator=(const Book& src)
-	{
-		if (this != &src && src)
-		{
-			m_title = src.m_title;
-			m_numChapters = src.m_numChapters;
-			m_numPages = src.m_numPages;
-			m_pageToChap = src.m_pageToChap;
-		}
-		return *this;
-	}
+	//Book& Book::operator=(const Book& src)
+	//{
+	//	if (this != &src && src)
+	//	{
+	//		m_title = src.m_title;
+	//		m_numChapters = src.m_numChapters;
+	//		m_numPages = src.m_numPages;
+	//		m_pageToChap = src.m_pageToChap;
+	//	}
+	//	return *this;
+	//}
 
 	bool Book::operator>(const Book& src) const
 	{

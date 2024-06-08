@@ -28,29 +28,88 @@ namespace seneca {
 		static T m_smallestItem;
 		static T m_largestItem;
 	protected:
-		void setSmallestItem(const T& src);
-		void setLargestItem(const T& src);
+		void setSmallestItem(const T& src)
+		{
+			if (src < m_smallestItem)
+			{
+				m_smallestItem = src;
+			}
+		}
+		void setLargestItem(const T& src)
+		{
+			if (src > m_largestItem)
+			{
+				m_largestItem = src;
+			}
+		}
 		/// <summary>
 		/// a mutator operator to receive an array index and return corresponding element from m_items array.
 		/// </summary>
 		/// <param name="index">an array index</param>
 		/// <returns>index corresponding element from m_items array</returns>
-		T& operator[](size_t index);
+		T& operator[](size_t index)
+		{
+			return m_items[index];
+		}
 		//const T& operator[](size_t index) const;
 		/// <summary>
 		/// a mutator to increase by 1 the size count of elements stored in the collection
 		/// </summary>
-		void incrSize();
+		void incrSize()
+		{
+			if (m_size < m_capacity)
+			{
+				m_size++;
+			}
+		}
 	public:
 		// default constructor
-		Collection();
+		Collection() { };
 		// Public Class Members
-		static T getSmallestItem();
-		static T getLargestItem();
-		unsigned int size() const;
-		unsigned int capacity() const;
-		bool operator+=(const T& t);
-		std::ostream& print(std::ostream& ostr) const;
+		static T getSmallestItem() 
+		{
+			return m_smallestItem;
+		}
+		static T getLargestItem()
+		{
+			return m_largestItem;
+		}
+		unsigned int size() const
+		{
+			return m_size;
+		}
+		unsigned int capacity() const
+		{
+			return m_capacity;
+		}
+		bool operator+=(const T& t)
+		{
+			if (m_size < m_capacity)
+			{
+				setSmallestItem(t);
+				setLargestItem(t);
+				m_items[m_size++] = t;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		std::ostream& print(std::ostream& ostr) const
+		{
+			ostr << "[";
+			for (size_t i = 0; i < m_size; i++)
+			{
+				ostr << m_items[i];
+				if (i < m_size - 1)
+				{
+					ostr << ",";
+				}
+			}
+			ostr << "]\n";
+			return ostr;
+		}
 	};
 
 	template<typename T, unsigned int C>
@@ -73,105 +132,6 @@ namespace seneca {
 
 	template<>
 	Book Collection<Book, sizeL>::m_largestItem{ "", 10000, 1 };
-
-
-	template<typename T, unsigned int C>
-	void Collection<T, C>::setSmallestItem(const T& src)
-	{
-		if (src < m_smallestItem)
-		{
-			m_smallestItem = src;
-		}
-	}
-
-	template<typename T, unsigned int C>
-	void Collection<T, C>::setLargestItem(const T& src)
-	{
-		if (src > m_largestItem)
-		{
-			m_largestItem = src;
-		}
-	}
-
-	template<typename T, unsigned int C>
-	T& Collection<T, C>::operator[](size_t index)
-	{
-		return m_items[index];
-	}
-
-	//template<typename T, unsigned int C>
-	//inline const T& Collection<T, C>::operator[](size_t index) const
-	//{
-	//	return m_items[index];
-	//}
-
-	template<typename T, unsigned int C>
-	void Collection<T, C>::incrSize()
-	{
-		if (m_size < m_capacity)
-		{
-			m_size++;
-		}
-	}
-
-	template<typename T, unsigned int C>
-	Collection<T, C>::Collection() { }
-
-	template<typename T, unsigned int C>
-	T Collection<T, C>::getSmallestItem()
-	{
-		return Collection<T, C>::m_smallestItem;
-	}
-
-	template<typename T, unsigned int C>
-	T Collection<T, C>::getLargestItem()
-	{
-		return Collection<T, C>::m_largestItem;
-	}
-
-	template<typename T, unsigned int C>
-	unsigned int Collection<T, C>::size() const
-	{
-		return m_size;
-	}
-
-	template<typename T, unsigned int C>
-	unsigned int Collection<T, C>::capacity() const
-	{
-		return m_capacity;
-	}
-
-	template<typename T, unsigned int C>
-	bool Collection<T, C>::operator+=(const T& t)
-	{
-		if (m_size < m_capacity)
-		{
-			setSmallestItem(t);
-			setLargestItem(t);
-			m_items[m_size++] = t;
-			return true;
-		}
-		else 
-		{
-			return false;
-		}
-	}
-
-	template<typename T, unsigned int C>
-	inline std::ostream& Collection<T, C>::print(std::ostream& ostr) const
-	{
-		ostr << "[" ;
-		for (size_t i = 0; i < m_size; i++)
-		{
-			ostr << m_items[i];
-			if (i < m_size - 1)
-			{
-				ostr << ",";
-			}
-		}
-		ostr << "]\n";
-		return ostr;
-	}
 
 	template<>
 	inline std::ostream& Collection<Book, sizeS>::print(std::ostream& ostr) const

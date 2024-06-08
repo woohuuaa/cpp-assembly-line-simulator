@@ -15,48 +15,44 @@ namespace seneca {
 	template<typename T>
 	class OrderedCollection : public Collection<T, sizeL>
 	{
-		void bubbleSort();
-	public:
-		// to place or insert the received item into the array m_items at an appropriate 
-		// index to ensure that the elements are in ascending order after insertion.
-		bool operator+=(const T& t);
-	};
-	template<typename T>
-	inline void OrderedCollection<T>::bubbleSort()
-	{
-		T tmp{};
-		size_t size = this->size();
-		for (size_t i = 0; i < size - 1; i++)
+		void bubbleSort()
 		{
-			for (size_t j = 0; j < size - i - 1; j++)
+			T tmp{};
+			size_t size = this->size();
+			for (size_t i = 0; i < size - 1; i++)
 			{
-				if (this->operator[](j) > this->operator[](j + 1))
+				for (size_t j = 0; j < size - i - 1; j++)
 				{
-					tmp = this->operator[](j);
-					this->operator[](j) = this->operator[](j + 1);
-					this->operator[](j + 1) = tmp;
+					if (this->operator[](j) > this->operator[](j + 1))
+					{
+						tmp = this->operator[](j);
+						this->operator[](j) = this->operator[](j + 1);
+						this->operator[](j + 1) = tmp;
+					}
 				}
 			}
 		}
-	}
-	template<typename T>
-	bool OrderedCollection<T>::operator+=(const T& t)
-	{
-		size_t size = this->size();
-		if (size < this->capacity())
+	public:
+		// to place or insert the received item into the array m_items at an appropriate 
+		// index to ensure that the elements are in ascending order after insertion.
+		bool operator+=(const T& t)
 		{
-			this->setSmallestItem(t);
-			this->setLargestItem(t);
-			this->incrSize();
-			this->operator[](size) = t;
-			// use bubble sort to sort the m_items array
-			bubbleSort();
-			return true;
+			size_t size = this->size();
+			if (size < this->capacity())
+			{
+				this->setSmallestItem(t);
+				this->setLargestItem(t);
+				this->incrSize();
+				this->operator[](size) = t;
+				// use bubble sort to sort the m_items array
+				bubbleSort();
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
-		else
-		{
-			return false;
-		}
-	}
+	};
 }
 #endif 

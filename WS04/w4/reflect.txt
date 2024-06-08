@@ -9,8 +9,54 @@
 // any other student or 3rd party content provider.			  //	 						
 ////////////////////////////////////////////////////////////////////////////
 
-design and code composition and aggregation class relationships
+🗎 To extract tokens from a string, I used .find() to find the end of each tokens, and used m_id = res.substr(start, end - start); to extract the part I need. Then I created a trimStr function to trim the part I extracted from the string because the original data is not perfect, with leading and trailing spaces. 
 
-use member functions of the string class to parse a string into tokens based on simple rules
+In the trimStr function, I used res.front() and res.erase(0, 1); to remove the leading spaces each by each, and used res.back() and res.erase(res.length() - 1); to remove the trailing spaces each by each.
 
-design and code a class that manages a dynamically allocated array of pointers to objects
+🗎 Both Restaurant and ConfirmationSender manages a dynamically allocated array of pointers to objects.
+Their data member Reservation** m_pReservations is a pointer holding an array of pointers that each element pointer points to an Reservation object.
+
+In Composition relationship, the composer object is responsible for destroying its component object(s) at or before its own destruction.
+
+Take Restaurant for example, Restaurant class controls the creation and destruction of Reservation objects that are held by each element pointers in its Reservation** m_pReservations{} array. 
+
+In the copy constructor of Reservation, we need to implement memory allocation not only for Reservation** m_pReservations{} array using syntax: m_pReservations = new Reservation*[cnt]; , but also for each element that points to a reservation object:
+m_numOfResv = cnt;  
+m_pReservations = new Reservation*[cnt];
+for (auto i = 0; i < cnt; ++i){
+       m_pReservations[i] = new Reservation(*reservations[i]);
+}
+
+For deallocation, we need to go through each element of pReservations array and delete the memory of each Reservation object it points to which we have allocated, and finally delete the pReservations array.
+if (m_pReservations) {
+	for (auto i = 0; i < m_numOfResv; ++i) {
+	      delete m_pReservations[i];
+	}
+delete[] m_pReservations;
+}
+
+In Aggregation relationship, aggregator does not manage the creation or destruction of the objects that it uses. The aggregator is complete whether or not any of the objects that it uses exist. The objects used survive the destruction of the aggregator. 
+
+The ConfirmationSender class uses both composition and aggregation, it holds a const seneca::Reservation** m_pReservations{}; array and controls its creation and destruction. This means a composition relationship. But each elements of the m_pReservations array points to a Reservation object lies in other memory location, meaning it holds references to Reservation objects but does not own or control their memory. This is an aggregation relationship.
+
+When implementing the copy constructor of ConfirmationSender class, we only need to allocate memory for m_pReservations array. Implementation is below:
+m_numOfResv = src.m_numOfResv;
+m_pReservations = new const Reservation * [m_numOfResv];
+for (auto i = 0; i < m_numOfResv; ++i) 
+{
+	m_pReservations[i] = src.m_pReservations[i];
+}
+Each elements in m_pReservations array only use the Reservation objects by copying its address to its element pointers, to access their data but not copy the whole objects. So there is no need to allocate memory for each element pointer. As for destructor, we also only need to delete memory allocated for m_pReservations array: delete[] m_pReservations;
+
+
+However, there is no difference between the move constructor of both classes. We use exactly the same implementation:
+if (this != &src) {
+	setEmpty();
+	if (src.m_pReservations) {
+		m_numOfResv = src.m_numOfResv;
+		m_pReservations = src.m_pReservations;
+		src.m_pReservations = nullptr;
+	}
+}
+In move constructor, we only copy m_pReservations (itself is a Reservation pointer) from the source and delete the source m_pReservations, in case unexpected behaviour. It is because the memory allocation has already been done, and to move the resources from source to current object, the current object only needs to take over the control of the original resources.
+

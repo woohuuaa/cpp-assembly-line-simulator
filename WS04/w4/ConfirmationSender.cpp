@@ -8,18 +8,17 @@ namespace seneca {
 	}
 	void ConfirmationSender::resize(size_t newSize)
 	{
-		const Reservation** tmpResP{};
-		tmpResP = new const Reservation*[newSize];
+		const Reservation** tmpResP = new const Reservation*[newSize];
 		if (newSize > m_numOfResv)
 		{
-			for (size_t i = 0; i < m_numOfResv; i++)
+			for (auto i = 0; i < m_numOfResv; ++i)
 			{
 				tmpResP[i] = m_pReservations[i];
 			}
 		}
 		else 
 		{
-			for (size_t i = 0, index = 0; i < m_numOfResv; i++)
+			for (auto i = 0, index = 0; i < m_numOfResv; ++i)
 			{
 				if (m_pReservations[i])
 				{
@@ -43,19 +42,16 @@ namespace seneca {
 	{
 		if (this != &src)
 		{
-			if (src.m_numOfResv)
+			setEmpty();
+			if (src.m_pReservations)
 			{
-				setEmpty();
 				m_numOfResv = src.m_numOfResv;
-				m_pReservations = new const Reservation*[src.m_numOfResv];
-				for (size_t i = 0; i < src.m_numOfResv; i++)
+				m_pReservations = new const Reservation * [m_numOfResv];
+				for (auto i = 0; i < m_numOfResv; ++i) 
 				{
 					m_pReservations[i] = src.m_pReservations[i];
 				}
-			}
-			else
-			{
-				setEmpty();
+
 			}
 		}
 		return *this;
@@ -64,16 +60,12 @@ namespace seneca {
 	{
 		if (this != &src)
 		{
-			if (src.m_numOfResv)
+			setEmpty();
+			m_numOfResv = src.m_numOfResv;
+			if (src.m_pReservations)
 			{
-				setEmpty();
-				m_numOfResv = src.m_numOfResv;
 				m_pReservations = src.m_pReservations;
 				src.m_pReservations = nullptr;
-			}
-			else
-			{
-				setEmpty();
 			}
 		}
 		return *this;
@@ -87,8 +79,7 @@ namespace seneca {
 		if (res)
 		{
 			bool found{ false };
-			// TODO: insert return statement here
-			for (size_t i = 0; i < m_numOfResv && !found; i++)
+			for (auto i = 0; i < m_numOfResv && !found; ++i)
 			{
 				if (m_pReservations[i] == &res)
 				{
@@ -108,7 +99,7 @@ namespace seneca {
 		if (res)
 		{
 			bool found{ false };
-			for (size_t i = 0; i < m_numOfResv && !found; i++)
+			for (auto i = 0; i < m_numOfResv && !found; ++i)
 			{
 				if (m_pReservations[i] == &res)
 				{
@@ -119,7 +110,7 @@ namespace seneca {
 			if (found)
 			{
 				resize(m_numOfResv - 1);
-				m_numOfResv--;
+				--m_numOfResv;
 			}
 		}
 		return *this;
@@ -129,7 +120,7 @@ namespace seneca {
 		o << "--------------------------\nConfirmations to Send\n--------------------------\n";
 		if (cfms.m_pReservations)
 		{
-			for (size_t i = 0; i < cfms.m_numOfResv; i++)
+			for (auto i = 0; i < cfms.m_numOfResv; ++i)
 			{
 				o << *cfms.m_pReservations[i];
 			}

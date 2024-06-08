@@ -20,7 +20,7 @@ namespace seneca {
 		/// a query that returns the number of reservations in the system
 		/// </summary>
 		/// <returns></returns>
-		size_t size();
+		size_t size() const;
 		/// <summary>
 		/// to insert the content of a Restaurant object into an ostream object
 		/// </summary>

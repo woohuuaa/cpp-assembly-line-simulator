@@ -64,7 +64,7 @@ namespace seneca {
 
 	Reservation::operator bool() const
 	{
-		return m_id.length();
+		return !m_id.empty();
 	}
 
 	std::ostream& operator<<(std::ostream& o, const Reservation& r)
@@ -74,6 +74,7 @@ namespace seneca {
 			<< std::right << std::setw(20) << r.m_name << "  "
 			<< std::left << std::setw(20) << "<" + r.m_email + ">"
 			<< "    ";
+
 		if (r.m_hour >= 6 && r.m_hour <= 9) {
 			o << "Breakfast";
 		}
@@ -86,14 +87,17 @@ namespace seneca {
 		else {
 			o << "Drinks";
 		}
+
 		o << " on day " << r.m_day << " @ " << r.m_hour << ":00 for "
 			<< r.m_numOfPeople;
+
 		if (r.m_numOfPeople == 1) {
 			o << " person." << std::endl;
 		}
 		else {
 			o << " people." << std::endl;
 		}
+
 		return o;
 	}
 }

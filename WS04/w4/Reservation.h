@@ -50,7 +50,6 @@ namespace seneca {
 		operator bool() const;
 		
 		// Friend Helpers
-		
 		/// <summary>
 		/// if the hour is between 6AM and 9AM (inclusive), the kitchen serves breakfast
 		/// if the hour is between 11AM and 3PM (inclusive), the kitchen serves lunch
