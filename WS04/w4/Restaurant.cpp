@@ -18,7 +18,7 @@ namespace seneca {
         {
             m_numOfResv = cnt;  
             m_pReservations = new Reservation*[cnt];
-            for (auto i = 0; i < cnt; ++i)
+            for (size_t i = 0; i < cnt; ++i)
             {
                 m_pReservations[i] = new Reservation(*reservations[i]);
             }
@@ -39,7 +39,7 @@ namespace seneca {
             {
                 m_numOfResv = src.m_numOfResv;
                 m_pReservations = new Reservation*[src.m_numOfResv];
-                for (auto i = 0; i < src.m_numOfResv; ++i)
+                for (size_t i = 0; i < src.m_numOfResv; ++i)
                 {
                     m_pReservations[i] = new Reservation(*src.m_pReservations[i]);
                 }
@@ -83,7 +83,7 @@ namespace seneca {
             << CALL_CNT << ")\n--------------------------\n";
         if (rest.m_pReservations)
         {
-            for (auto i = 0; i < rest.m_numOfResv; ++i)
+            for (size_t i = 0; i < rest.m_numOfResv; ++i)
             {
                 o << *rest.m_pReservations[i];
             }
