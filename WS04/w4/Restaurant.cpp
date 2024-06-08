@@ -3,7 +3,7 @@ namespace seneca {
     void Restaurant::setEmpty()
     {
         if (m_pReservations) {
-            for (auto i = 0; i < m_numOfResv; ++i) {
+            for (size_t i = 0; i < m_numOfResv; ++i) {
                 delete m_pReservations[i];
             }
             delete[] m_pReservations;

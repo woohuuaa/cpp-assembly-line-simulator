@@ -11,14 +11,14 @@ namespace seneca {
 		const Reservation** tmpResP = new const Reservation*[newSize];
 		if (newSize > m_numOfResv)
 		{
-			for (auto i = 0; i < m_numOfResv; ++i)
+			for (size_t i = 0; i < m_numOfResv; ++i)
 			{
 				tmpResP[i] = m_pReservations[i];
 			}
 		}
 		else 
 		{
-			for (auto i = 0, index = 0; i < m_numOfResv; ++i)
+			for (size_t i = 0, index = 0; i < m_numOfResv; ++i)
 			{
 				if (m_pReservations[i])
 				{
@@ -47,7 +47,7 @@ namespace seneca {
 			{
 				m_numOfResv = src.m_numOfResv;
 				m_pReservations = new const Reservation * [m_numOfResv];
-				for (auto i = 0; i < m_numOfResv; ++i) 
+				for (size_t i = 0; i < m_numOfResv; ++i) 
 				{
 					m_pReservations[i] = src.m_pReservations[i];
 				}
@@ -61,9 +61,9 @@ namespace seneca {
 		if (this != &src)
 		{
 			setEmpty();
-			m_numOfResv = src.m_numOfResv;
 			if (src.m_pReservations)
 			{
+				m_numOfResv = src.m_numOfResv;
 				m_pReservations = src.m_pReservations;
 				src.m_pReservations = nullptr;
 			}
@@ -79,7 +79,7 @@ namespace seneca {
 		if (res)
 		{
 			bool found{ false };
-			for (auto i = 0; i < m_numOfResv && !found; ++i)
+			for (size_t i = 0; i < m_numOfResv && !found; ++i)
 			{
 				if (m_pReservations[i] == &res)
 				{
@@ -99,7 +99,7 @@ namespace seneca {
 		if (res)
 		{
 			bool found{ false };
-			for (auto i = 0; i < m_numOfResv && !found; ++i)
+			for (size_t i = 0; i < m_numOfResv && !found; ++i)
 			{
 				if (m_pReservations[i] == &res)
 				{
@@ -120,7 +120,7 @@ namespace seneca {
 		o << "--------------------------\nConfirmations to Send\n--------------------------\n";
 		if (cfms.m_pReservations)
 		{
-			for (auto i = 0; i < cfms.m_numOfResv; ++i)
+			for (size_t i = 0; i < cfms.m_numOfResv; ++i)
 			{
 				o << *cfms.m_pReservations[i];
 			}
