@@ -17,7 +17,7 @@ namespace seneca {
 		std::string m_author{};
 		std::string m_title{};
 		std::string m_country{};
-		unsigned m_year{};
+		size_t m_year{};
 		double m_price{};
 		std::string m_description{}; // a short summary of the book
 		void trim(std::string& str);
