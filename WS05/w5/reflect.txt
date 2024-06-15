@@ -1,0 +1,110 @@
+////////////////////////////////////////////////////////////////////////////
+//	  		      Worksphop 5				  //
+// Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
+//			   Date: 2024-06-15				  //
+// ---------------------------------------------------------------------- //
+// I declare that this submission is the result of my own work and only   //
+// copied the code that my professor provided to complete my workshops	  //
+// and assignments. This submitted piece of work has not been shared with //
+// any other student or 3rd party content provider.			  //	 						
+////////////////////////////////////////////////////////////////////////////
+
+****design and code a templated class that allocates and deallocates dynamic memory
+In the Collection template class, we allocates and deallocates dynamic memory: 
+	class Collection {
+		std::string m_name{};
+		T* m_items{};
+		unsigned m_size{};
+		void (*observer)(const Collection<T>&, const T&);
+		void resize(size_t newSize) {
+			T* tmpItems = new T[newSize];
+			for (size_t i = 0; i < m_size; ++i) {
+				tmpItems[i] = m_items[i];
+			}
+			delete[] m_items;
+			m_items = tmpItems;
+		}
+------------------------------------------------------------------------------------------------
+	~Collection() {
+		delete[] m_items;
+	}
+------------------------------------------------------------------------------------------------
+****design and code a lambda expression
+I created a lambda expression in w5p2.cpp module to fix the price based on country and year
+[=] denotes non-local variables by value. In this case, non-local variables is usdToCadRate and gbpToCadRate
+I use [=] to avoid any accident modification of the original values
+	auto fixPrice = [=](seneca::Book& b) {
+		if (b.country() == "US") {
+			b.price() = b.price() * usdToCadRate;
+		}
+		else if (b.country() == "UK" && b.year() >= 1990 && b.year() <= 1999) {
+			b.price() = b.price() * gbpToCadRate;
+		}
+	};
+-------------------------------------------------------------------------------------------------
+In the Collection template class, we designed a functor(function object) using syntax:
+void (*observer)(const Collection<T>&, const T&);
+
+And we coded a function that receives the address of a callback function to execute
+The parameter of the function is a pointer to a function that returns void and accepts 
+two parameters a collection and an item that has just been added to the collection
+syntax as below:
+		void setObserver(void (*observer)(const Collection<T>&, const T&)) {
+			this->observer = observer;
+		}
+-------------------------------------------------------------------------------------------------
+throw exceptions of different types & distinguish exception types from one another:
+When loading books and movies from books.txt and movies.txt file, we throw an std::runtime_error if the file is not read:
+		if (!file) {
+			throw std::runtime_error("Cannot open file");
+		}
+
+When printing Collection objects, we throw an std::out_of_range if the loop tried to access beyond the array bounds:
+		T& operator[](size_t idx) const	{
+			if (idx >= m_size) {
+				std::string msg = "Bad index [" + std::to_string(idx) + "]. Collection has [" + std::to_string(m_size) + "] items.";
+				throw std::out_of_range(msg);
+			}
+When loading a file to SpellChecker, we throw a message if the file name is not valid:
+	SpellChecker::SpellChecker(const char* filename)
+	{
+		std::ifstream file(filename);
+		if (!file)
+		{
+			const char* msg("Bad file name!");
+			throw msg;
+		}
+-------------------------------------------------------------------------------------------------
+***the difference between the implementations/utilizations of a functor and a lambda expression. When is appropriate to use each one?
+
+A functor (function object) and a lambda expression are both allowed you to create callable objects.
+
+We implemented a lambda function in workshop 5 w5 module, using syntax:
+auto fixPrice = [=](seneca::Book& b){ ***implementation*** }
+
+And a functor in Collection template class as below:
+void setObserver(void (*observer)(const Collection<T>&, const T&)) {
+	this->observer = observer;
+}
+
+Lambda expression is a inline function has direct access to non-local variables with its referencing environment, unlike a function pointer. When you want to capture local variables without explicitly passing them as arguments, you can use one. The utilizations of lambda expression is when you need a short, inline and reusable operation that used locally and in a particular context. We used fixPrice() in w5 to adjust the price of the books based on requested logic.
+
+A functor is used when we want to reuse the operation in different parts of our codes. And when we want to hold state across multiple calls. In w5, two different functions that take the same types of parameters are designed, we passed these function to setObserver() function using functor: void (*observer)(const Collection<T>&, const T&) and saved it to a Movie and Books objects' member variables respectively. So that when we use += to add each book and movie, the function will be called through the function (its member variable).
+-------------------------------------------------------------------------------------------------
+****the constructor for SpellChecker generates an exception in certain conditions. How would you change your code to achieve the same result, but without exceptions (both on the constructor and on the client side)? Compare the two solutions.
+
+To achieve that, we need to store the status of SpellChecker to see if it is in error state (m_errorStatus and m_errorMsg), and create functions to check the object state (bool SpellChecker::isError() const). 
+In the constructor, I will change the throw exception part to set the error status and error message of the SpellChecker object.
+In client code, we simply check if the SpellChecker object is in error state using its member function. If it is, print out the m_errorMsg.
+
+Comparing to exception, with this approach, the error handling in client code is simplified and avoid try-catch block. However, we need to create data member and member functions to store and check the status of the object.
+-------------------------------------------------------------------------------------------------
+****the classes Movie and Book contain almost identical logic in loading data from the file. How would you redesign the classes in order not to duplicate that logic?
+
+The best way is to create a base class which Book and Movie derived from. This class has a member function to load the data from file, and extract each line from the file based on different derived class. We will need to create a pure virtual function to that is to extract each token in each line based on different type of the object. In the load function of base class, we call this 
+pure virtual function.
+In classes Movie and Book, we will need to create a member function using the same name as the pure virtual function. Then we move the logic in one-argument constructor that extract the tokens from data to the newly created member function. So when we use base class function to load the file, it will automatically call the token-extracting function based on the object type.
+-------------------------------------------------------------------------------------------------
+****the classes Movie and Book are instantiated from the main() function using a custom constructor, but they also contain a default constructor. Is the default constructor necessary? Could you remove it? Justify your answer.
+
+Default Constructor for Movie class is necessary, because the movies array in main() needs to create an array of Movie objects with default values before any further initialization. For other class, you may delete the default constructor because we didn't use them, however, it is still better to keep one because it provides flexibility for future changes and simplifies code maintenance by adhering to common class design practices.
