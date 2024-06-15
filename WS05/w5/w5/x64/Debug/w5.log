@@ -1,10 +1,4 @@
-﻿  Book.cpp
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\Book.cpp(52,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\Book.cpp(58,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\Book.cpp(63,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\Book.cpp(68,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\Book.cpp(72,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  w5_p2.cpp
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\w5_p2.cpp(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (950). Save the file in Unicode format to prevent data loss
-  Generating Code...
-  w5.vcxproj -> C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\x64\Debug\w5.exe
+﻿  w5_p1.cpp
+w5_p2.obj : error LNK2005: main already defined in w5_p1.obj
+w5_p2.obj : error LNK2005: "int cout" (?cout@@3HA) already defined in w5_p1.obj
+C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\x64\Debug\w5.exe : fatal error LNK1169: one or more multiply defined symbols found

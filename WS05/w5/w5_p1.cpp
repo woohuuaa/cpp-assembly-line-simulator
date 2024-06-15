@@ -98,7 +98,7 @@ int main(int argc, char** argv)
 	// TODO: iterate over the library and print each book to the screen
 	for (size_t i = 0; i < 7; ++i)
 	{
-		std::cout << library[i] << std::endl;
+		std::cout << library[i];
 	}
 
 	std::cout << "-----------------------------------------\n\n";
@@ -117,7 +117,7 @@ int main(int argc, char** argv)
 	// TODO: iterate over the library and print each book to the screen
 	for (size_t i = 0; i < 7; ++i)
 	{
-		std::cout << library[i] << std::endl;
+		std::cout << library[i];
 	}
 
 	std::cout << "-----------------------------------------\n";
