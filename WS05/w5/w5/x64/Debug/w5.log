@@ -1,4 +1,1 @@
-﻿  w5_p1.cpp
-w5_p2.obj : error LNK2005: main already defined in w5_p1.obj
-w5_p2.obj : error LNK2005: "int cout" (?cout@@3HA) already defined in w5_p1.obj
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\x64\Debug\w5.exe : fatal error LNK1169: one or more multiply defined symbols found
+﻿  w5.vcxproj -> C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS05\w5\x64\Debug\w5.exe

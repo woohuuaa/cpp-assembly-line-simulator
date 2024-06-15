@@ -214,7 +214,7 @@ int main(int argc, char** argv)
 			for (auto i = 0u; i < 10; ++i)
 				std::cout << theCollection[i];
 		}
-		catch (std::out_of_range o)
+		catch (std::out_of_range& o)
 		{
 			std::cerr << "** EXCEPTION: " << o.what() << std::endl;
 		}
