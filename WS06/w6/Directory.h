@@ -44,10 +44,10 @@ namespace seneca {
 		Directory& operator=(Directory&& src) = delete;
 
 		// p2
-		// deletes a resource from the directory whose name matches the first argument 
-		// (removing it from its contents and deallocating memory for it)
-		//void remove(const std::string&, const std::vector<OpFlags>&);
-		//void display(std::ostream&, const std::vector<FormatFlags>&) const;
+		//deletes a resource from the directory whose name matches the first argument 
+		//(removing it from its contents and deallocating memory for it)
+		void remove(const std::string&, const std::vector<OpFlags>&);
+		void display(std::ostream&, const std::vector<FormatFlags>&) const;
 	};
 }
 #endif // !SENECA_DIRECTORY_H

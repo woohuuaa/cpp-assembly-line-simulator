@@ -130,7 +130,7 @@
     <ClCompile Include="Directory.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Filesystem.cpp" />
-    <ClCompile Include="w6_p1.cpp" />
+    <ClCompile Include="w6_p2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Directory.h" />

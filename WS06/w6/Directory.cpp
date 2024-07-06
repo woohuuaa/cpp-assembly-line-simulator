@@ -50,7 +50,7 @@ namespace seneca {
 	}
 	Resource* Directory::find(const std::string& filename, const std::vector<OpFlags>& flags)
 	{
-		bool reccur = false;
+		bool recur = false;
 		for (const auto& res : m_content) {
 			if (res->name() == filename) {
 				return res;
@@ -58,10 +58,10 @@ namespace seneca {
 		}
 		for (const auto& flag : flags) {
 			if (flag == OpFlags::RECURSIVE) {
-				reccur = true;
+				recur = true;
 			}
 		}
-		if (reccur)
+		if (recur)
 		{
 			for (const auto& res : m_content) {
 				if (res->type() == NodeType::DIR) {
@@ -81,12 +81,12 @@ namespace seneca {
 			delete res;
 		}
 	}
-	//void Directory::remove(const std::string&, const std::vector<OpFlags>&)
-	//{
+	void Directory::remove(const std::string&, const std::vector<OpFlags>&)
+	{
 
-	//}
-	//void Directory::display(std::ostream&, const std::vector<FormatFlags>&) const
-	//{
+	}
+	void Directory::display(std::ostream&, const std::vector<FormatFlags>&) const
+	{
 
-	//}
+	}
 }
