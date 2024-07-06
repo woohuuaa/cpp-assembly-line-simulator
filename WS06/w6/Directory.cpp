@@ -50,12 +50,18 @@ namespace seneca {
 	}
 	Resource* Directory::find(const std::string& filename, const std::vector<OpFlags>& flags)
 	{
+		bool reccur = false;
 		for (const auto& res : m_content) {
 			if (res->name() == filename) {
 				return res;
 			}
 		}
-		if (std::find(flags.begin(), flags.end(), OpFlags::RECURSIVE) != flags.end())
+		for (const auto& flag : flags) {
+			if (flag == OpFlags::RECURSIVE) {
+				reccur = true;
+			}
+		}
+		if (reccur)
 		{
 			for (const auto& res : m_content) {
 				if (res->type() == NodeType::DIR) {
