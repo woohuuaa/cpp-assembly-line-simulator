@@ -35,7 +35,6 @@ namespace seneca {
 		// OrderedCollection module code and tester module 
 		// w3_p2.cpp to manage Book-type object. 
 		//
-		//Book& operator=(const Book& src);
 		bool operator>(const Book& src) const;
 		bool operator<(const Book& src) const;
 		//

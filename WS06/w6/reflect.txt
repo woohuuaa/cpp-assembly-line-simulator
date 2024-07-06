@@ -1,0 +1,21 @@
+////////////////////////////////////////////////////////////////////////////
+//	  		      Worksphop 6				  //
+// Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
+//			   Date: 2024-07-02				  //
+// ---------------------------------------------------------------------- //
+// I declare that this submission is the result of my own work and only   //
+// copied the code that my professor provided to complete my workshops	  //
+// and assignments. This submitted piece of work has not been shared with //
+// any other student or 3rd party content provider.			  //	 						
+////////////////////////////////////////////////////////////////////////////
+
+manage polymorphic objects using the vector container of the STL
+move a dynamically allocated object into a container
+code a range-based iteration on the objects in a container
+report and handle an exception
+
+Why do you need to deallocate the dynamically allocated memory in your vector of resources?
+
+To call specific functions for a Directory objects stored in a Resource*, what special C++ operation did you have to do and why?
+
+In this workshop you had to use std::vector<seneca::Resource*> to store a collection of filesystem resources as pointers. Could you have used std::vector<seneca::Resource> instead? Justify your answer!

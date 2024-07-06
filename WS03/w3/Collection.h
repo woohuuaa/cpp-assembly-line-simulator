@@ -22,9 +22,7 @@ namespace seneca {
 		T m_items[C]{};
 		unsigned int m_capacity{C};
 		unsigned int m_size{0};
-		// class member: 
-		// keeps track of the smallest item and 
-		// largest item across all the class objects 
+		// class member: keeps track of the smallest item and largest item across all the class objects 
 		static T m_smallestItem;
 		static T m_largestItem;
 	protected:
