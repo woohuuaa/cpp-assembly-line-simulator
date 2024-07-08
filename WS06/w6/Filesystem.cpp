@@ -19,17 +19,16 @@ namespace seneca {
 
 	void Filesystem::createDirAndFile(const std::string& path, const std::string& content)
 	{
-		std::string dir{};
 		size_t start{0}, end = path.find('/');
+		std::string dir = path.substr(start, end);
 		if (end != std::string::npos)
 		{
 			do {
-				dir = path.substr(start, end);
-				Directory* foundDir = dynamic_cast<Directory*>(m_current->find(dir));
+				Directory* foundDir = dynamic_cast<Directory*>(m_current->find(dir + '/'));
 				if (!foundDir) {
-					Directory* newDir = new Directory(dir);
+					Directory* newDir = new Directory(dir + '/');
 					// see if need to change
-					newDir->update_parent_path((m_current->path() + dir));
+					newDir->update_parent_path(m_current->path());
 					*this += newDir;
 					m_current = newDir;
 				}
@@ -38,14 +37,17 @@ namespace seneca {
 					// change to newly created directly object
 					m_current = foundDir;
 				}
-			} while ((start = end + 1) && (end = path.find('/', start)) && (end != std::string::npos));
+				start = end + 1;
+				end = path.find('/', start);
+				dir = path.substr(start, end - start);
+			} while (end != std::string::npos);
 		}
 		if (!content.empty())
 		{
 			// create new file object
 			std::string file = path.substr(start);
 			File* newFile = new File(file, content);
-			newFile->update_parent_path(path);
+			newFile->update_parent_path(m_current->path());
 			*this += newFile;
 		}
 	}
@@ -64,7 +66,6 @@ namespace seneca {
 			std::string content{};
 			while (std::getline(fin, line))
 			{
-				m_current = m_root;
 				size_t splitPos = line.find('|');
 				// case FILE
 				if (splitPos != std::string::npos)
@@ -84,6 +85,7 @@ namespace seneca {
 
 					createDirAndFile(path);
 				}
+				m_current = m_root;
 			}
 			fin.close();
 		}

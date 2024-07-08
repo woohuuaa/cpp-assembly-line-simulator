@@ -51,7 +51,7 @@ namespace seneca {
 	{
 		for (const auto& res : m_content) {
 			if (res->name() == src->name()) {
-				throw std::runtime_error("Resource with the same name already exists in the directory");
+				throw;
 			}
 		}
 		m_content.push_back(src);
@@ -61,10 +61,6 @@ namespace seneca {
 	Resource* Directory::find(const std::string& filename, const std::vector<OpFlags>& flags)
 	{
 		bool recur = false;
-		//if (m_name == filename)
-		//{
-		//	return this;
-		//}
 		for (const auto& res : m_content) {
 			if (res->name() == filename) {
 				return res;
@@ -93,12 +89,21 @@ namespace seneca {
 	void Directory::remove(const std::string& name, const std::vector<OpFlags>& flags)
 	{
 		Resource* found = find(name, flags);
+		size_t index{};
+		for (const auto& content : m_content) {
+			if (content->name() == name) {
+				break;
+			}
+			index++;
+		}
+
 		if (found)
 		{
 			if ((found->type() == NodeType::DIR) && !checkFlag(flags))	{
 				throw std::invalid_argument(name + "is a directory. Pass the recursive flag to delete directories");
 			}
 			delete found;
+			m_content.erase(m_content.begin() + index);
 		}
 		else
 		{
@@ -107,7 +112,7 @@ namespace seneca {
 	}
 	void Directory::display(std::ostream& os, const std::vector<FormatFlags>& flags) const
 	{
-		os << "Total size: " + std::to_string(size()) + "bytes";
+		os << "Total size: " + std::to_string(size()) + " bytes" << std::endl;
 		bool tagLong{};
 		for (const auto& flag : flags) {
 			if (flag == FormatFlags::LONG) {
@@ -116,21 +121,22 @@ namespace seneca {
 		}
 		for (auto& res : m_content) {
 			if (res->type() == NodeType::DIR) {
-				os << std::left << std::setw(15) << "D | " << res->name() << " |";
+				os << "D | " << std::left << std::setw(15) << res->name() << " |";
 				if (tagLong)
 				{
 					os << std::right << std::setw(2) << std::to_string(res->count()) << " | "
-						<< std::right << std::setw(10) << std::to_string(res->size()) + "bytes";
+						<< std::right << std::setw(10) << std::to_string(res->size()) + " bytes";
 				}
 			}
 			else {
-				os << std::left << std::setw(15) << "F | " << res->name() << " |";
+				os << "F | " << std::left << std::setw(15) << res->name() << " |";
 				if (tagLong)
 				{
-					os << std::right << std::setw(2) << " | "
-						<< std::right << std::setw(10) << std::to_string(res->size()) + "bytes";
+					os << std::right << std::setw(2) << "   | "
+						<< std::right << std::setw(10) << std::to_string(res->size()) + " bytes";
 				}
 			}
+			os << std::endl;
 		}
 	}
 }
