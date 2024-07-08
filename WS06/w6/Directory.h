@@ -7,6 +7,7 @@ namespace seneca {
 	class Directory : public Resource
 	{
 		std::vector<Resource*> m_content{};
+		bool checkFlag(const std::vector<OpFlags>& flags);
 	public:
 		/// <summary>
 		/// a custom constructor that receives the name of the directory as a string
@@ -46,8 +47,8 @@ namespace seneca {
 		// p2
 		//deletes a resource from the directory whose name matches the first argument 
 		//(removing it from its contents and deallocating memory for it)
-		void remove(const std::string&, const std::vector<OpFlags>&);
-		void display(std::ostream&, const std::vector<FormatFlags>&) const;
+		void remove(const std::string& name, const std::vector<OpFlags>& flags = {});
+		void display(std::ostream& os, const std::vector<FormatFlags>& flags = {}) const;
 	};
 }
 #endif // !SENECA_DIRECTORY_H

@@ -1,17 +1,2 @@
 ﻿  Filesystem.cpp
-  w6_p2.cpp
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\w6_p2.cpp(64,16): error C2660: 'seneca::Directory::display': function does not take 1 arguments
-  C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\Directory.h(50,8):
-  see declaration of 'seneca::Directory::display'
-  C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\w6_p2.cpp(64,16):
-  while trying to match the argument list '(std::ostream)'
-  
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\w6_p2.cpp(138,20): error C2660: 'seneca::Directory::remove': function does not take 1 arguments
-  C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\Directory.h(49,8):
-  see declaration of 'seneca::Directory::remove'
-  C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\w6_p2.cpp(138,20):
-  while trying to match the argument list '(const char [11])'
-  
-  Generating Code...
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\Filesystem.cpp(15,1): error C4716: 'seneca::Filesystem::operator=': must return a value
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\Filesystem.cpp(19,1): error C4716: 'seneca::Filesystem::operator+=': must return a value
+  w6.vcxproj -> C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS06\w6\x64\Debug\w6.exe
