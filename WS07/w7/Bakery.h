@@ -2,6 +2,7 @@
 #define SENECA_BAKERY_H
 #include <iostream>
 #include <vector>
+#include <list>
 namespace seneca {
 	
 	enum class BakedType
@@ -16,6 +17,7 @@ namespace seneca {
 		size_t shelfLife{};
 		size_t qty{};
 		double price{};
+		BakedGood(){};
 		BakedGood(BakedType type, std::string desc, size_t sl, size_t qty, double price);
 	};
 
@@ -26,6 +28,10 @@ namespace seneca {
 	public:
 		Bakery(std::string filename);
 		void showGoods(std::ostream& os) const;
+		void sortBakery(const std::string& fieldName);
+		std::vector<BakedGood> combine(Bakery& b);
+		bool inStock(const std::string& desc, BakedType type) const;
+		std::list<BakedGood> outOfStock(BakedType type) const;
 	};
 	std::ostream& operator<<(std::ostream& out, const BakedGood& b);
 }
