@@ -11,11 +11,11 @@
 namespace seneca {
 	class Station
 	{
-		int id{};
-		std::string itemName{};
-		std::string description{};
-		size_t nextNo{};
-		size_t stock{};
+		int m_id{};
+		std::string m_itemName{};
+		std::string m_description{};
+		size_t m_nextNo{};
+		size_t m_stock{};
 		static size_t m_widthField;
 		static int id_generator;
 	public:
@@ -26,8 +26,6 @@ namespace seneca {
 		void updateQuantity();
 		void display(std::ostream& os, bool full) const;
 	};
-	static size_t m_widthField{0};
-	static int id_generator{0};
 }
 #endif // !SENECA_STATION_H
 

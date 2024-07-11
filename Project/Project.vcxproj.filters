@@ -33,4 +33,11 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Stations1.txt" />
+    <Text Include="Stations2.txt" />
+    <Text Include="ms1_output.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

@@ -135,6 +135,11 @@
     <ClInclude Include="Station.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="ms1_output.txt" />
+    <Text Include="Stations1.txt" />
+    <Text Include="Stations2.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
