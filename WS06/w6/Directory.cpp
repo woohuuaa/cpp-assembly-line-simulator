@@ -89,18 +89,18 @@ namespace seneca {
 	void Directory::remove(const std::string& name, const std::vector<OpFlags>& flags)
 	{
 		Resource* found = find(name, flags);
-		size_t index{};
-		for (const auto& content : m_content) {
-			if (content->name() == name) {
-				break;
-			}
-			index++;
-		}
-
 		if (found)
 		{
 			if ((found->type() == NodeType::DIR) && !checkFlag(flags))	{
 				throw std::invalid_argument(name + "is a directory. Pass the recursive flag to delete directories");
+			}
+			// find index of the found file
+			size_t index{};
+			for (const auto& content : m_content) {
+				if (content->name() == name) {
+					break;
+				}
+				index++;
 			}
 			delete found;
 			m_content.erase(m_content.begin() + index);

@@ -16,6 +16,10 @@ report and handle an exception
 
 Why do you need to deallocate the dynamically allocated memory in your vector of resources?
 
+My vector of resources holds the pointer of resources that points to either directory or file object, that their memory are allocated in w6p1/w6p2 file. 
+
 To call specific functions for a Directory objects stored in a Resource*, what special C++ operation did you have to do and why?
+
+We need to use dynamic casting function: dynamic_cast<Directory*> dynamically cast the Resource* to a Directory* type in order to call specific functions for a Directory objects. A Resource* can only use the function of Resource type but not the function of its derived class type Directory. 
 
 In this workshop you had to use std::vector<seneca::Resource*> to store a collection of filesystem resources as pointers. Could you have used std::vector<seneca::Resource> instead? Justify your answer!
