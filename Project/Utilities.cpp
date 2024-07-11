@@ -41,7 +41,7 @@ namespace seneca {
 			more = false;
 			throw "No Token.";
 		}
-		if (next_pos == m_delimiter) {
+		if (str[next_pos] == m_delimiter) {
 			throw "Invalid next position.";
 		}
 		m_widthField = m_widthField < token.size() ? token.size() : m_widthField;
