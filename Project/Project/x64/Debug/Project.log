@@ -1,0 +1,10 @@
+﻿  Station.cpp
+  ms1.cpp
+  Generating Code...
+ms1.obj : error LNK2019: unresolved external symbol "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __cdecl seneca::Station::getItemName(void)const " (?getItemName@Station@seneca@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ) referenced in function main
+ms1.obj : error LNK2019: unresolved external symbol "public: unsigned __int64 __cdecl seneca::Station::getNextSerialNumber(void)" (?getNextSerialNumber@Station@seneca@@QEAA_KXZ) referenced in function main
+ms1.obj : error LNK2019: unresolved external symbol "public: unsigned __int64 __cdecl seneca::Station::getQuantity(void)const " (?getQuantity@Station@seneca@@QEBA_KXZ) referenced in function main
+ms1.obj : error LNK2019: unresolved external symbol "public: void __cdecl seneca::Station::updateQuantity(void)" (?updateQuantity@Station@seneca@@QEAAXXZ) referenced in function main
+ms1.obj : error LNK2019: unresolved external symbol "public: void __cdecl seneca::Station::display(class std::basic_ostream<char,struct std::char_traits<char> > &,bool)const " (?display@Station@seneca@@QEBAXAEAV?$basic_ostream@DU?$char_traits@D@std@@@std@@_N@Z) referenced in function main
+Utilities.obj : error LNK2001: unresolved external symbol "private: static char seneca::Utilities::m_delimiter" (?m_delimiter@Utilities@seneca@@0DA)
+C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\x64\Debug\Project.exe : fatal error LNK1120: 6 unresolved externals

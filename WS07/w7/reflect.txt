@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////
 //	  		      Worksphop 7				  //
 // Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
-//			   Date: 2024-07-10				  //
+//			   Date: 2024-07-11				  //
 // ---------------------------------------------------------------------- //
 // I declare that this submission is the result of my own work and only   //
 // copied the code that my professor provided to complete my workshops	  //
@@ -9,7 +9,62 @@
 // any other student or 3rd party content provider.			  //	 						
 ////////////////////////////////////////////////////////////////////////////
 
-copy data from a file into a sequential container
-use the numeric library to accumulate data values
-use a lambda expression to specify an operation on each value in a data set
-use the algorithm library to sort data values
+I used following functions to copy data from a file into a sequential container:
+std::ifstream f(filename);
+std::getline(f, line);
+std::string type = trim(line.substr(start, typeSize));
+std::string desc = trim(line.substr(start, descSize));
+int sl = std::stoi(trim(line.substr(start, SLSize)));
+int qty = std::stoi(trim(line.substr(start, stockSize)));
+double price = std::stod(trim(line.substr(start, priceSize)));
+BakedGood bg(bType, desc, sl, qty, price);
+m_collection.push_back(bg);
+
+I created a customized BakedGood 5-argument constructor to create each BakedGood elements using the token extracted from each line of record in the file, and then use push_back to append the element to m_collection sequential container.
+
+***list all the STL functions that you have used in this workshop; explain your reasoning for choosing each one, and not another:
+
+std::for_each(m_collection.begin(), m_collection.end(), [&](auto bg) { os << bg << '\n'; });
+Reason: Because I need to go through each element in vector so I choose for_each.
+
+int totalStock = std::accumulate(m_collection.begin(), m_collection.end(), 0, [](const int& totalS, const BakedGood& b) {
+	return totalS + b.qty; });
+double totalPrice = std::accumulate(m_collection.begin(), m_collection.end(), 0.0, [](const double& totalP, const BakedGood& b) {
+	return totalP + b.price ; });
+Reason: Using std::accumulate max optimized the work to accumulate the total stock and total price. We cannot use count or count_if because it only count the number of items but not accumulate the value of the items it contains. Choosing 4-argument instead of 3-argument accumulate is because of the items in our array is a class and we need to extract the value stored in data member of each item, so we need a lambda expression to fulfill that.
+
+std::sort(m_collection.begin(), m_collection.end(), [](const BakedGood& b1, const BakedGood& b2) {
+	return b1.description < b2.description;
+});
+Reason: Given our current materials, sort is the only algorithm that we can use to sort the array. 
+
+std::merge(m_collection.begin(), m_collection.end(), b.m_collection.begin(), b.m_collection.end(), 
+	newCollect.begin(), [](const BakedGood& b1, const BakedGood& b2) {
+		return b1.price < b2.price; 
+	});
+Reason: Merge is the algorithm which combine elements in two sorted array using merge sort. Any other algorithms is way more complicated to use if we want to combined two arrays together.
+
+any_of(m_collection.begin(), m_collection.end(), [=](const BakedGood& b) {
+	return b.description == desc;
+});
+Reason: We can use find or any_of to find if there is any element match the condition. At first I use count_if, but we actually don't need to know the number of occurrences. So I just pick any_of instead. Find should perform the same.
+
+std::copy_if(m_collection.begin(), m_collection.end(), std::back_inserter(outOfStockList), [=](const BakedGood& b) {
+	return b.type == type && b.qty == 0;
+});
+Reason: To present a list of out of stock items, we first need to create a new array and insert elements that is out of stock into it. copy_if can satisfy our needs by copying every element which matches the condition into the newly created array.
+
+***present the advantages of using STL algorithms vs. implementing the functionality by yourself using loops:
+It is obvious that using STL algorithms makes our code way more shorter and handy to use compare to implementing the functionality by myself using loops and largely reduce code complexity. It also enhances readability and maintainability.
+The built-in algorithms are highly optimized in terms of performance. If we implement our own version, we might not achieve the same level of performance.
+
+***for the sortBakery function, would anything differ in how it is implemented if the choice of collection was either a vector or a list? If there is a difference what is it?
+vector provides random access iterators so we can use std::sort directly. Implementation as follows: 
+std::sort(m_collection.begin(), m_collection.end(), [](const BakedGood& b1, const BakedGood& b2) {
+	return b1.description < b2.description;
+});
+
+list is list class template defines classes that manage doubly linked sequences that are optimized for insertion and removal of elements anywhere throughout the list, particularly in larger sequences. list provides bidirectional iterators, not random access iterators, so we cannot use std::sort directly. Instead, list has a sort method to work with linked lists. The implementation will be as following if the m_collection is a list:
+m_collection.sort([](const BakedGood& a, const BakedGood& b) {
+            return a.stock < b.stock;
+        });

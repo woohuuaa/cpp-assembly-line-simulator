@@ -65,16 +65,17 @@ namespace seneca {
 	void Bakery::showGoods(std::ostream& os) const
 	{
 		// display each BakedGood in m_collection
+		// can also use all_of / none_of
 		std::for_each(m_collection.begin(), m_collection.end(), [&](auto bg) { os << bg << '\n'; });
+		
 		// count and display total of BakedGood qty
-
-		////////////////////////////////////////////// Question: why we need to use a const int& to return 
+		/////////////////////////// Question: why we need to use a const int& to accumulate 
 		int totalStock = std::accumulate(m_collection.begin(), m_collection.end(), 0, [](const int& totalS, const BakedGood& b) {
 			return totalS + b.qty; });
 		os << "Total Stock: " << totalStock << std::endl;
 		// count and display total of BakedGood price
 		double totalPrice = std::accumulate(m_collection.begin(), m_collection.end(), 0.0, [](const double& totalP, const BakedGood& b) {
-			return totalP + b.price ; });
+			return totalP + b.price; });
 		os << "Total Price: " << std::fixed << std::setprecision(2) << totalPrice << std::endl;
 	}
 
@@ -110,9 +111,9 @@ namespace seneca {
 	{
 		int newSize = m_collection.size() + b.m_collection.size();
 		std::vector<BakedGood> newCollect(newSize);
-		////////////////////////////////////////////// Question: Why run time error if vector not sorted
 		sortBakery("Price");
 		b.sortBakery("Price");
+		// use merge sort to insert elements
 		std::merge(m_collection.begin(), m_collection.end(), b.m_collection.begin(), b.m_collection.end(), 
 			newCollect.begin(), [](const BakedGood& b1, const BakedGood& b2) {
 				return b1.price < b2.price; 
@@ -122,8 +123,9 @@ namespace seneca {
 
 	bool Bakery::inStock(const std::string& desc, BakedType type) const
 	{
-		return count_if(m_collection.begin(), m_collection.end(), [=](const BakedGood& b) {
-			return b.description == desc;
+		// any_of / find
+		return any_of(m_collection.begin(), m_collection.end(), [=](const BakedGood& b) {
+				return b.description == desc;
 			});
 		;
 	}
@@ -131,7 +133,18 @@ namespace seneca {
 	std::list<BakedGood> Bakery::outOfStock(BakedType type) const
 	{
 		std::list<BakedGood> outOfStockList{};
-		std::vector<BakedGood>::iterator itr;
+		// Another version to create an out-of-stock array to return:
+		// use count_if to count the size of new array
+		//int newSize = count_if(m_collection.begin(), m_collection.end(), [=](const BakedGood& b) {
+		//return b.type == type && b.qty == 0; });
+		//
+		//outOfStockList.resize(newSize);
+		//
+		//copy_if(m_collection.begin(), m_collection.end(), outOfStockList.begin(), [=](const BakedGood& b) {
+		//return b.type == type && b.qty == 0;
+		//});
+		// 
+		// algorithms do not change the memory size of cotainer
 		std::copy_if(m_collection.begin(), m_collection.end(), std::back_inserter(outOfStockList), [=](const BakedGood& b) {
 			return b.type == type && b.qty == 0;
 			});
