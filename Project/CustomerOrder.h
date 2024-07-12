@@ -28,16 +28,17 @@ namespace seneca {
 		size_t m_cntItem{};			// a count of the number of items in the customer's order
 		Item** m_lstItem{};			// a dynamically allocated array of pointers to dynamically allocated objects of type Item
 		static size_t m_widthField;	// the maximum width of a field
+		void addListItem(const std::string& itemName);
 	public:
 		CustomerOrder() {};
 		CustomerOrder(const std::string& str);	// create CustomerOrder object from a string
 
-		CustomerOrder(const CustomerOrder& src) = delete;
+		CustomerOrder(const CustomerOrder& src);	// copy constructor throws an exception if called 
 		CustomerOrder& operator=(const CustomerOrder& src) = delete;
 
-		CustomerOrder(CustomerOrder&& src);				// move constructor
-		CustomerOrder& operator=(CustomerOrder&& src);	// move operator
-		virtual ~CustomerOrder();						// descructor
+		CustomerOrder(CustomerOrder&& src) noexcept;			// move constructor
+		CustomerOrder& operator=(CustomerOrder&& src) noexcept;	// move operator
+		virtual ~CustomerOrder();								// descructor
 
 		bool isOrderFilled() const;								// true if all the items in the order have been filled
 		bool isItemFilled(const std::string& itemName) const;	// true if all items specified by itemName have been filled

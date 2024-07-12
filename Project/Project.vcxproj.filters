@@ -24,7 +24,7 @@
     <ClCompile Include="CustomerOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ms1.cpp">
+    <ClCompile Include="ms2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,9 +42,6 @@
   <ItemGroup>
     <Text Include="Stations1.txt" />
     <Text Include="Stations2.txt" />
-    <Text Include="ms1_output.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="ms2_output.txt">
       <Filter>Resource Files</Filter>
     </Text>
