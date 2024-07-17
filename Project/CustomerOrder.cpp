@@ -12,27 +12,21 @@
 namespace seneca {
 	size_t CustomerOrder::m_widthField{};
 	
-	void CustomerOrder::addListItem(const std::string& itemName)
+	void CustomerOrder::setEmpty()
 	{
-		// allocate memory for a new Item* array based on number of item
-		Item** tmpList = new Item*[m_cntItem];
-		// if new array size > 1, copy the m_lstItem into new array
-		for (size_t i = 0; i < m_cntItem - 1 && m_cntItem > 1; ++i)
+		if (m_lstItem)
 		{
-			tmpList[i] = m_lstItem[i];
+			for (size_t i = 0; i < m_cntItem; ++i) {
+				delete m_lstItem[i];
+			}
 		}
-		// add new item to new Item* array
-		Item i(itemName);
-		tmpList[m_cntItem - 1] = &i;
 		delete[] m_lstItem;
-		// m_lstItem get the new size Item* array
-		m_lstItem = tmpList;
-		tmpList = nullptr;
 	}
+
 	CustomerOrder::CustomerOrder(const std::string& str)
 	{
 		Utilities u;
-		size_t nextPo{ 0u }, countI{};
+		size_t nextPo{ 0u };
 		bool more{ true };
 		std::string token{};
 		std::vector<Item*> itemList{};
@@ -47,7 +41,7 @@ namespace seneca {
 			itemList.push_back(i);
 			m_cntItem++;
 		}
-
+		delete[] m_lstItem;
 		// allocate memory for m_lstItem and copy the item pointers (itemList) into m_lstItem
 		m_lstItem = new Item*[m_cntItem];
 		for (size_t i = 0; i < m_cntItem; ++i) {
@@ -70,6 +64,7 @@ namespace seneca {
 	{
 		if (this != &src)
 		{
+			setEmpty();
 			m_name = src.m_name;
 			m_product = src.m_product;
 			m_cntItem = src.m_cntItem;
@@ -80,7 +75,7 @@ namespace seneca {
 	}
 	CustomerOrder::~CustomerOrder()
 	{
-		delete[] m_lstItem;
+		setEmpty();
 	}
 	bool CustomerOrder::isOrderFilled() const
 	{
@@ -129,7 +124,7 @@ namespace seneca {
 			station.updateQuantity();	// subtracts 1 from the station inventory
 			m_lstItem[index]->m_serialNumber = station.getNextSerialNumber();	// updates Item::m_serialNumber
 			m_lstItem[index]->m_isFilled = true;
-			os << "    Filled " + m_name + ", " + m_product + "[" + itemName + "]" << std::endl;
+			os << "    Filled " + m_name + ", " + m_product + " [" + itemName + "]" << std::endl;
 		}
 		// if the order contains items handled but unfilled, and the inventory is empty
 		else if (!m_lstItem[index]->m_isFilled && !station.getQuantity())

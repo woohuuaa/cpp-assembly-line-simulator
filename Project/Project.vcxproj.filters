@@ -24,13 +24,13 @@
     <ClCompile Include="CustomerOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ms3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Workstation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LineManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ms3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,5 +57,7 @@
     <Text Include="ms2_output.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="ms3_output.txt" />
+    <Text Include="AssemblyLine.txt" />
   </ItemGroup>
 </Project>

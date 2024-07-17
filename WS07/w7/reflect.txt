@@ -55,7 +55,7 @@ std::copy_if(m_collection.begin(), m_collection.end(), std::back_inserter(outOfS
 Reason: To present a list of out of stock items, we first need to create a new array and insert elements that is out of stock into it. copy_if can satisfy our needs by copying every element which matches the condition into the newly created array.
 
 ***present the advantages of using STL algorithms vs. implementing the functionality by yourself using loops:
-It is obvious that using STL algorithms makes our code way more shorter and handy to use compare to implementing the functionality by myself using loops and largely reduce code complexity. It also enhances readability and maintainability.
+It is obvious that using STL algorithms makes our code way more shorter and handy to use compare to implementing the functionality by myself using loops. It largely reduces code complexity. It also enhances readability and maintainability.
 The built-in algorithms are highly optimized in terms of performance. If we implement our own version, we might not achieve the same level of performance.
 
 ***for the sortBakery function, would anything differ in how it is implemented if the choice of collection was either a vector or a list? If there is a difference what is it?

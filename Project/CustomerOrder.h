@@ -28,7 +28,7 @@ namespace seneca {
 		size_t m_cntItem{};			// a count of the number of items in the customer's order
 		Item** m_lstItem{};			// a dynamically allocated array of pointers to dynamically allocated objects of type Item
 		static size_t m_widthField;	// the maximum width of a field
-		void addListItem(const std::string& itemName);
+		void setEmpty();			// deallocate memory
 	public:
 		CustomerOrder() {};
 		CustomerOrder(const std::string& str);	// create CustomerOrder object from a string

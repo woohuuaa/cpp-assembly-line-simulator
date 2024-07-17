@@ -1,11 +1,4 @@
-﻿  LineManager.cpp
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\LineManager.cpp(23,3): error C2065: 'm_itemName': undeclared identifier
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\LineManager.cpp(24,3): error C2065: 'm_nextNo': undeclared identifier
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\LineManager.cpp(24,19): error C2039: 'stoi': is not a member of 'std'
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\iostream(18,1):
-  see declaration of 'std'
-  
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\LineManager.cpp(24,19): error C3861: 'stoi': identifier not found
-  Workstation.cpp
-  ms3.cpp
+﻿  CustomerOrder.cpp
+  ms2_prof.cpp
   Generating Code...
+  Project.vcxproj -> C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\x64\Debug\Project.exe
