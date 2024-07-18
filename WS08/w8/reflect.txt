@@ -1,0 +1,23 @@
+////////////////////////////////////////////////////////////////////////////
+//	  		      Worksphop 7				  //
+// Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
+//			   Date: 2024-07-18				  //
+// ---------------------------------------------------------------------- //
+// I declare that this submission is the result of my own work and only   //
+// copied the code that my professor provided to complete my workshops	  //
+// and assignments. This submitted piece of work has not been shared with //
+// any other student or 3rd party content provider.			  //	 						
+////////////////////////////////////////////////////////////////////////////
+
+create a program component of quadratic complexity
+use a smart pointer to move an object
+
+why could we not use a unique_ptr in your Database class?
+
+what changes you had to make in part 1 to transform the class into a templated one?
+
+a class that allows only one instance to be created is called a singleton. Can you think at another way to create a singleton without using static members? How would that object be managed?
+
+the class Database has a resource attribute (the database instance), yet no copy/move operations were implemented. Is that a bug (justify your answer)?
+
+we said that the class Database can be instantied only once, yet in the output we see that the custom constructor is called twice (same for the destructor). Explain.
