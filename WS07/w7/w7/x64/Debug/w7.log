@@ -1,5 +1,5 @@
 ﻿  Bakery.cpp
-C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS07\w7\Bakery.cpp(112,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS07\w7\Bakery.cpp(122,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\numeric(37,26): warning C4267: '=': conversion from 'size_t' to '_Ty', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\numeric(37,26): warning C4267:         with
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\numeric(37,26): warning C4267:         [
@@ -8,7 +8,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.3351
   (compiling source file 'Bakery.cpp')
   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\numeric(37,26):
   the template instantiation context (the oldest one first) is
-  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS07\w7\Bakery.cpp(73,25):
+  	C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\WS07\w7\Bakery.cpp(83,25):
   	see reference to function template instantiation '_Ty std::accumulate<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<seneca::BakedGood>>>,int,seneca::Bakery::showGoods::<lambda_2>>(const _InIt,const _InIt,_Ty,_Fn)' being compiled
           with
           [

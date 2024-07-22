@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////
 //	  		      Worksphop 7				  //
 // Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
-//			   Date: 2024-07-18				  //
+//			   Date: 2024-07-21				  //
 // ---------------------------------------------------------------------- //
 // I declare that this submission is the result of my own work and only   //
 // copied the code that my professor provided to complete my workshops	  //
@@ -9,15 +9,108 @@
 // any other student or 3rd party content provider.			  //	 						
 ////////////////////////////////////////////////////////////////////////////
 
-create a program component of quadratic complexity
+/////
+create a program component of quadratic complexity:
+My GetValue and SetValue has a linear complexity. Both  have linear complexity O(n)  because it iterates over m_count/MAX_SIZE elements to find a match.
+where GetValue or SetValue  be called within nested loops creates Quadratic Complexity.
+In TEST #2 and TEST #3, each test involves iterating over the keys array and calling getInstance and GetValue or SetValue on each key.
+the nested loop structure leads to O(n×m) complexity. The iteration over keys is O(n), where 𝑛 n is the number of keys. Inside this loop, GetValue has a linear complexity O(m), where m is m_count. If n and m are of the same order, this can be considered quadratic O(n 2 ).
+
+		Err_Status GetValue(const std::string& key, T& value)
+		{
+			for (size_t i = 0; i < m_count; ++i)
+			{
+				if (m_keys[i] == key)
+				{	// store in the second parameter the corresponding value from the array of values
+					value = m_values[i];
+					return Err_Status::Err_Success;
+				}
+			}
+			return Err_Status::Err_NotFound;
+		}
+
+		Err_Status SetValue(const std::string& key, const T& value)
+		{
+			for (size_t i = 0; i < MAX_SIZE; ++i) {
+				if (m_keys[i].empty()) {
+					m_keys[i] = key;
+					m_values[i] = value;
+					m_count++;
+					return Err_Status::Err_Success;
+				}
+			}
+			return Err_Status::Err_OutOfMemory;
+		}
+
+///////
 use a smart pointer to move an object
+		static std::shared_ptr<Database> c_databaseAdd;	// store the address of the one and only instance of type Database
+		// creates an instance of type Database
+		c_databaseAdd = static_cast<std::shared_ptr<Database>>(new Database(filename));
 
+//////
 why could we not use a unique_ptr in your Database class?
+ANS: a unique_ptr manage one-to-one relationships between objects (or resources) and their pointers. It cannot copy construct or copy assign.
+1. When we declare a static class variable, using unique_pt causes issues with global accessibility since only one part of the program can own it. Once moved, the original reference becomes invalid.
 
+static std::shared_ptr<Database> c_databaseAdd;
+
+2. When using std::unique_ptr, each call to getInstance could potentially return a different pointer if the singleton instance is not properly managed, leading to the comparisons showing "Different" even when logically they should be "Same". This is because std::unique_ptr enforces unique ownership, and if moved or reallocated, the address can change.
+		void* db1 = seneca::Database<std::string>::getInstance(argv[1]).get();
+		void* db3 = seneca::Database<std::string>::getInstance("nothing").get();
+		std::cout << (db1 == db3 ? "Same" : "Different") << " database.\n";   // Same
+
+3. When getInstance calls the constructor and transfer ownership of c_databaseAdd, the original pointer becomes null, causing potential issues where other parts of the code expect access to the singleton instance.
+static Database* getInstance(const std::string& filename) {
+    if (!c_databaseAdd) {
+        c_databaseAdd = std::make_unique<Database>(filename);
+    }
+
+/////
 what changes you had to make in part 1 to transform the class into a templated one?
-
+1. I moved all implementation to .h file to reduce code repetition
+2. changed T m_values[MAX_SIZE]{}; to type T in order to store different type of value
+3. In constructor, when reading values from file, changed value variable to type T
+	// extract value from a line
+	T value;
+	f >> value;
+4. changed class variable initialization type Database to Database<T> and added template<typename T>
+	template<typename T>
+	std::shared_ptr<Database<T>> Database<T>::c_databaseAdd = nullptr;
+5. template specialization for encryptDecrypt() for type std::string and type long long
+	template<>
+	inline void Database<std::string>::encryptDecrypt(std::string& value) {
+	template<>
+	inline void Database<long long>::encryptDecrypt(long long& value) {
+/////
 a class that allows only one instance to be created is called a singleton. Can you think at another way to create a singleton without using static members? How would that object be managed?
-
+ANS: Using external management entirely and managing the singleton's lifecycle outside the class, ensuring only one instance is created and shared can create a singleton without using static members. This can be achieved by utilizing an external context or configuration class that holds and provides access to the singleton instance.
+1. We still use private constructor to prevent instantiation.
+2. Delete copy constructor and assignment operator to avoid instantiation.
+3. Add a friend class Manager allows only Manager can create instances.
+4. a Manager class use a share_ptr to hold the instance's address. and create methods to manages the lifecycle and access to singleton instances such as getInstance or resetInstance.
+This approach can ensure singleton pattern is implemented without using static members.
+/////
 the class Database has a resource attribute (the database instance), yet no copy/move operations were implemented. Is that a bug (justify your answer)?
+ANS: The resource attribute -- database instance -- has type: static std::shared_ptr<Database>, which is a smart pointer that 
+1. copies itself in a copy construction
+2. transfers ownership of the object or resource in move construction and move assignment
+3. releases itself from its object or resource and reattaches itself in a copy assign
+4. calls its object's or resource's destructor only if it itself is being destroyed and no other smart pointer shares ownership of the object or resource
+It means we don't have to manually implement copy/move operations to use this resource.
+/////
+we said that the class Database can be instantized only once, yet in the output we see that the custom constructor is called twice (same for the destructor). Explain.
+ANS: In part 2, we changed the class Database to a template that allows different type of value usage. There are two different types of class Database has been instantized in w8p2.cpp : Database<std::string> and Database<long long>. Each class Database has its own static attribute to store its address. When Database<std::string> instantized, it went into its own private constructor and instantized only once, then stored the address of its instance to it static attribute. Same for Database<long long>. This is why the custom constructor and destructor are both called twice.
+	void* db1 = seneca::Database<std::string>::getInstance(argv[1]).get();
+	void* db2 = seneca::Database<long long>::getInstance(argv[2]).get();
 
-we said that the class Database can be instantied only once, yet in the output we see that the custom constructor is called twice (same for the destructor). Explain.
+	static std::shared_ptr<Database> c_databaseAdd;	// store the address of the one and only instance of type Database
+
+When client code tries to instantize twice, the program does nothing but only return the already existed Database<T>.
+	void* db3 = seneca::Database<std::string>::getInstance("nothing").get();
+	void* db4 = seneca::Database<long long>::getInstance("nothing").get();
+By following code checking are there different database been instantized for the same type (the answer is no), it proves the class Database of that type can only be instantized once.
+		std::cout << (db1 == db3 ? "Same" : "Different") << " database.\n";   // Same
+		std::cout << (db2 == db4 ? "Same" : "Different") << " database.\n";   // Same
+		std::cout << (db1 == db2 ? "Same" : "Different") << " database.\n";   // Different
+		std::cout << (db1 == db4 ? "Same" : "Different") << " database.\n";   // Different

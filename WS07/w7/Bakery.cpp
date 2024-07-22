@@ -1,3 +1,13 @@
+////////////////////////////////////////////////////////////////////////////
+//	  																      //
+// Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
+//							Date: 2024-07-19							  //
+// ---------------------------------------------------------------------- //
+// I declare that this submission is the result of my own work and only   //
+// copied the code that my professor provided to complete my workshops	  //
+// and assignments. This submitted piece of work has not been shared with //
+// any other student or 3rd party content provider.						  //	 																      //
+////////////////////////////////////////////////////////////////////////////
 #include "Bakery.h"
 #include <fstream>
 #include <string>
@@ -66,7 +76,7 @@ namespace seneca {
 	{
 		// display each BakedGood in m_collection
 		// can also use all_of / none_of
-		std::for_each(m_collection.begin(), m_collection.end(), [&](auto bg) { os << bg << '\n'; });
+		std::for_each(m_collection.begin(), m_collection.end(), [&os](auto bg) { os << bg << '\n'; });
 		
 		// count and display total of BakedGood qty
 		/////////////////////////// Question: why we need to use a const int& to accumulate 

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////
 //	  																      //
 // Name: Wan-Hua Wu |  Email: wwu104@myseneca.ca |  Student ID: 152921227 //
-//							Date: 2024-07-14							  //
+//							Date: 2024-07-19							  //
 // ---------------------------------------------------------------------- //
 // I declare that this submission is the result of my own work and only   //
 // copied the code that my professor provided to complete my workshops	  //
@@ -14,6 +14,7 @@
 #include <memory>
 #include <fstream>
 #include <string>
+#include <cstring>
 #include <iomanip>
 namespace seneca {
 	constexpr size_t MAX_SIZE = 20;
@@ -28,7 +29,7 @@ namespace seneca {
 	template<typename T>
 	class Database
 	{
-		int m_count{};									// the number of entries in the database
+		size_t m_count{};								// the number of entries in the database
 		std::string m_keys[MAX_SIZE]{};					// array of strings representing the keys
 		T m_values[MAX_SIZE]{};							// array of strings representing the values
 		std::string m_filename{};						// representing the database file name
@@ -41,12 +42,12 @@ namespace seneca {
 		Database(const std::string& filename)
 		{
 			std::string line{};
-			size_t count{};
 			// prints to the screen the address of the current instance and the prototype of the constructor 
 			std::cout << "[" << std::hex << this << "] Database(const std::string&)" << std::dec << std::endl;
+			m_filename = filename;
 			// opens the file and read the key/value pairs into the attributes
 			std::ifstream f(filename);
-			while (!f.eof() && count < MAX_SIZE)
+			while (!f.eof() && m_count < MAX_SIZE)
 			{
 				// extract key from a line
 				std::string key{};
@@ -57,16 +58,15 @@ namespace seneca {
 				key.replace(pos, 1, " ");
 
 				// store key and value in array
-				m_keys[count] = key;
+				m_keys[m_count] = key;
 
 				// extract value from a line
 				T value;
 				f >> value;
 				encryptDecrypt(value);
-				m_values[count++] = value;
+				m_values[m_count++] = value;
 			}
 			f.close();
-			m_count++;
 		}
 
 		void encryptDecrypt(T& value) {	}
@@ -87,7 +87,7 @@ namespace seneca {
 		// a query that searches in the array of keys for a the first parameter
 		Err_Status GetValue(const std::string& key, T& value)
 		{
-			for (size_t i = 0; i < MAX_SIZE; ++i)
+			for (size_t i = 0; i < m_count; ++i)
 			{
 				if (m_keys[i] == key)
 				{	// store in the second parameter the corresponding value from the array of values
@@ -104,6 +104,7 @@ namespace seneca {
 				if (m_keys[i].empty()) {
 					m_keys[i] = key;
 					m_values[i] = value;
+					m_count++;
 					return Err_Status::Err_Success;
 				}
 			}
@@ -131,9 +132,9 @@ namespace seneca {
 	inline void Database<std::string>::encryptDecrypt(std::string& value) {
 		const char secret[]{ "secret encryption key" };
 
-		for (int i = 0; i < value.size(); ++i)
+		for (size_t i = 0; i < value.size(); ++i)
 		{
-			for (int j = 0; j < std::strlen(secret); ++j)
+			for (size_t j = 0; j < std::strlen(secret); ++j)
 				value[i] ^= secret[j];
 		}
 	}
@@ -143,9 +144,9 @@ namespace seneca {
 	inline void Database<long long>::encryptDecrypt(long long& value) {
 		const char secret[]{ "super secret encryption key" };
 
-		for (int i = 0; i < sizeof(value); ++i)
+		for (size_t i = 0; i < sizeof(value); ++i)
 		{
-			for (int j = 0; j < std::strlen(secret); ++j)
+			for (size_t j = 0; j < std::strlen(secret); ++j)
 				reinterpret_cast<char*>(&value)[i] ^= secret[j];
 		}
 	}
