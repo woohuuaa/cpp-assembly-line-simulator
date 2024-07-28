@@ -21,6 +21,7 @@ namespace seneca
 		for (int i = 0; i < size; i++)
 		{
 			avg += arr[i];
+			std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 		}
 		avg /= divisor;
 	}
@@ -37,6 +38,7 @@ namespace seneca
 		for (int i = 0; i < size; i++)
 		{
 			var += (arr[i] - avg) * (arr[i] - avg);
+			std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 		}
 		var /= divisor;
 	}
@@ -108,39 +110,34 @@ namespace seneca
 
 		// bind total_items to computeAvgFactor
 		auto fnComAvg = std::bind(computeAvgFactor, std::placeholders::_1, std::placeholders::_2, total_items, std::placeholders::_3);
+		// bind total_items(divisor) and avg to computeVarFactor
+		auto fnComVar = std::bind(computeVarFactor, std::placeholders::_1, std::placeholders::_2, total_items, avg, std::placeholders::_3);
 
+		// created threads
 		for (int i = 0; i < num_threads; i++) {
 			tAvg.push_back(std::thread(fnComAvg, data + p_indices[i], (p_indices[i + 1] - p_indices[i]), std::ref(averages[i])));
+			tVar.push_back(std::thread(fnComVar, data + p_indices[i], (p_indices[i + 1] - p_indices[i]), std::ref(variances[i])));
 		}
 
+		// join threads
 		for (auto& t : tAvg) {
 			t.join();
 		}
 
-		avg = 0;
-		for (int i = 0; i < num_threads; i++) {
-			avg += averages[i];
-			//std::cout << "avg= " << avg << " | avg[" << i << "]= " << averages[i] << " | " << std::endl;
-		}
-
-		// bind total_items(divisor) and avg to computeVarFactor
-		auto fnComVar = std::bind(computeVarFactor, std::placeholders::_1, std::placeholders::_2, total_items, avg, std::placeholders::_3);
-		
-		for (int i = 0; i < num_threads; i++) {
-			tVar.push_back(std::thread(fnComVar, data + p_indices[i], (p_indices[i + 1] - p_indices[i]), std::ref(variances[i])));
-		}
+		//// created threads
+		//for (int i = 0; i < num_threads; i++) {
+		//	tVar.push_back(std::thread(fnComVar, data + p_indices[i], (p_indices[i + 1] - p_indices[i]), std::ref(variances[i])));
+		//}
 
 		for (auto& t : tVar) {
 			t.join();
 		}
 
-		var = 0;
+		// calculate avarage
 		for (int i = 0; i < num_threads; i++) {
+			avg += averages[i];
 			var += variances[i];
 		}
-
-		//computeAvgFactor(data, total_items, total_items, avg);
-		//computeVarFactor(data, total_items, total_items, avg, var);
 
 		std::ofstream f(fnameTarget, std::ios::out | std::ios::binary);
 		if (f) {
