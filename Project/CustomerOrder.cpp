@@ -1,7 +1,7 @@
 // Name: Wan-Hua Wu
 // Seneca Student ID: 152921227
 // Seneca email: wwu104@myseneca.ca
-// Date of completion: 2024-07-12
+// Date of completion: 2024-07-31
 //
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
@@ -82,10 +82,7 @@ namespace seneca {
 		bool isFilled{true};
 		for (size_t i = 0; i < m_cntItem && isFilled; ++i)
 		{
-			if (!m_lstItem[i]->m_isFilled) 
-			{
-				isFilled = false;
-			}
+			isFilled = m_lstItem[i]->m_isFilled ? true : false;
 		}
 		return isFilled;
 	}
@@ -97,7 +94,7 @@ namespace seneca {
 		{
 			if (m_lstItem[i]->m_itemName == itemName)
 			{
-				isFilled = !(m_lstItem[i]->m_isFilled) ? false : true;
+				isFilled = m_lstItem[i]->m_isFilled ? true : false;
 			}
 		}
 		return isFilled;
@@ -105,31 +102,27 @@ namespace seneca {
 
 	void CustomerOrder::fillItem(Station& station, std::ostream& os)
 	{
-		bool found{};
-		size_t index{};
-		std::string itemName{};
+		std::string itemName, sName = station.getItemName();
 		// find if the station is for fulfilling items in m_lstItem
-		for (size_t i = 0; i < m_cntItem && !found; ++i)
-		{
-			if (m_lstItem[i]->m_itemName == station.getItemName())
+		for (size_t i = 0; i < m_cntItem ; ++i)
+		{	//if the order contains items handled and item is not filled
+			if (m_lstItem[i]->m_itemName == sName && !m_lstItem[i]->m_isFilled)
 			{
 				itemName = m_lstItem[i]->m_itemName;
-				index = i;
-				found = true;
+				// fulfill the order if station qty is available
+				if (station.getQuantity())
+				{
+					station.updateQuantity();	// subtracts 1 from the station inventory
+					m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();	// updates Item::m_serialNumber
+					m_lstItem[i]->m_isFilled = true;
+					os << "    Filled " + m_name + ", " + m_product + " [" + itemName + "]" << std::endl;
+					return;
+				}
+				else
+				{
+					os << "    Unable to fill " + m_name + ", " + m_product + "[" + itemName + "]" << std::endl;
+				}
 			}
-		}
-		// fulfill the order if item found and station qty is available
-		if (found && station.getQuantity())
-		{
-			station.updateQuantity();	// subtracts 1 from the station inventory
-			m_lstItem[index]->m_serialNumber = station.getNextSerialNumber();	// updates Item::m_serialNumber
-			m_lstItem[index]->m_isFilled = true;
-			os << "    Filled " + m_name + ", " + m_product + " [" + itemName + "]" << std::endl;
-		}
-		// if the order contains items handled but unfilled, and the inventory is empty
-		else if (!m_lstItem[index]->m_isFilled && !station.getQuantity())
-		{
-			os << "    Unable to fill " + m_name + ", PRODUCT [" + itemName + "]" << std::endl;
 		}
 	}
 

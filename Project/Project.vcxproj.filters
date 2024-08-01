@@ -30,7 +30,7 @@
     <ClCompile Include="LineManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ms2.cpp">
+    <ClCompile Include="ms3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

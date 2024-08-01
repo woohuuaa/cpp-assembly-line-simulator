@@ -1,12 +1,16 @@
 // Name: Wan-Hua Wu
 // Seneca Student ID: 152921227
 // Seneca email: wwu104@myseneca.ca
-// Date of completion: 2024-07-12
+// Date of completion: 2024-07-31
 //
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
 #include "Workstation.h"
 namespace seneca {
+	std::deque<CustomerOrder> g_pending;
+	std::deque<CustomerOrder> g_completed;
+	std::deque<CustomerOrder> g_incomplete;
+
 	Workstation::Workstation(const std::string& str) : Station(str) {
 	}
 
@@ -19,22 +23,19 @@ namespace seneca {
 	}
 	bool Workstation::attemptToMoveOrder() 
 	{	// if the order requires no more service at this station or cannot be filled (not enough inventory)
-		if (m_orders.front().isOrderFilled() || !getQuantity())
+		if (m_orders.size() > 0 && (m_orders.front().isItemFilled(this->getItemName()) || !getQuantity()))
 		{	// move it to the next station
 			if (m_pNextStation)
 			{
-				m_pNextStation->m_orders.push_back(m_orders.front());
+				*m_pNextStation += std::move(m_orders.front());
 			}
-			else // if there is no next station in the assembly line
-			{
-				if (m_orders.front().isOrderFilled())
-				{
-					g_completed.push_front(m_orders.front());
-				}
-				else
-				{
-					g_incomplete.push_front(m_orders.front());
-				}
+			else if (m_orders.front().isOrderFilled())
+			{	// pop_front
+				g_completed.push_back(std::move(m_orders.front()));
+			}
+			else
+			{	// pop_front
+				g_incomplete.push_back(std::move(m_orders.front()));
 			}
 			m_orders.pop_front();
 			return true;
@@ -61,9 +62,10 @@ namespace seneca {
 		}
 	}
 
+
 	Workstation& Workstation::operator+=(CustomerOrder&& newOrder)
 	{
-		m_orders.push_back(newOrder);
+		m_orders.push_back(std::move(newOrder));
 		return *this;
 	}
 }
