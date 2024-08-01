@@ -29,12 +29,12 @@ namespace seneca {
 			{
 				*m_pNextStation += std::move(m_orders.front());
 			}
-			else if (m_orders.front().isOrderFilled())
-			{	// pop_front
+			else if (m_orders.front().isOrderFilled())	// if no next station and order is filled, move to complete
+			{	
 				g_completed.push_back(std::move(m_orders.front()));
 			}
-			else
-			{	// pop_front
+			else	// if no next station and order is unfilled, move to imcomplete
+			{	
 				g_incomplete.push_back(std::move(m_orders.front()));
 			}
 			m_orders.pop_front();

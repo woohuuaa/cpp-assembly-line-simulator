@@ -1,2 +1,4 @@
-﻿  Workstation.cpp
-  Project.vcxproj -> C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\x64\Debug\Project.exe
+﻿  LineManager.cpp
+  Workstation.cpp
+  Generating Code...
+C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\LineManager.cpp(1,1): error C1090: PDB API call failed, error code '3': C:\Users\nmoji\Documents\CPA\oop345\OOP345-Works\Project\Project\x64\Debug\vc143.pdb

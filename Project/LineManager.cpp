@@ -84,7 +84,7 @@ namespace seneca {
 	{
 		static int counter = 0;	// current iteration number
 		// iteration number (how many times this function has been called by the client)
-		os << "Line Manager Iteration:" << ++counter << std::endl;
+		os << "Line Manager Iteration: " << ++counter << std::endl;
 		if (g_pending.size()) {
 			*m_firstStation += std::move(g_pending.front());
 			g_pending.pop_front();
