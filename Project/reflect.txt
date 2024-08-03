@@ -8,3 +8,12 @@
 // and assignments. This submitted piece of work has not been shared with //
 // any other student or 3rd party content provider.			  //	 						
 ////////////////////////////////////////////////////////////////////////////
+
+The most difficult part is ms3 and understanding how the line manager work on filling and moving orders. I started these modules on Jul 12 but cannot understand only by its description. It seems like some important information missing and we need to spent a lot of time understanding the design logic. So I decided to wait until your video release. You made a great video explaining it! I would say you are the best OOP professor we can have!
+
+I spent my time mostly dealing with attemptToMoveOrder() and fillItem(). For attemptToMoveOrder(), the if statement setting is quite important. At first I didn't check if there is any order in m_orders for current workstation so has compilation error.
+Although the instruction doesn't say it clear, but the fillItem function in CustomerOrder module needs to be modified for ms3 (from ms2) so that we can generate the correct final output. We need to put our fill item logic in a loop to go through ever item in an order, so when an item is unable to fill, it continuously finds the next same item. But at the same time, we can only fill one item per call if we are able to fill the item. Isn't the design weird?!!?
+
+Building on the foundational knowledge from OOP244, OOP345 introduces more concepts and additional tools that we can utilize. Templates are one of the most annoying thing to deal with. But best part is that we don't have to deal with char array (instead, we can finally use string library) and allocate everything manually (hooray! for vector).
+
+Compared to OOP244, the workload of OOP345 is relatively reasonable. The best part is that we don't have to do 2 workshops every week. Plus you will explain workshops in details. This let us have a clear picture of what we were doing for each workshop. Fardad didn't do that because he explained every concept thoroughly that we didn't have time talk about workshops LOL.
