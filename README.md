@@ -1,10 +1,12 @@
-# OOP345-Works
+# cpp-assembly-line-simulator
 
-Coursework and final project for Seneca College's OOP345 course, focused on object-oriented programming in C++.
+A configurable C++ OOP assembly-line simulator for order fulfillment, inventory tracking, and workstation workflow orchestration.
 
-## Main Project: Assembly Line Workflow Simulator
+## Overview
 
-The main project is a configurable assembly-line simulator that processes customer orders through a chain of workstations. Each workstation manages one inventory item, assigns serial numbers, fills matching order items when stock is available, and passes the order to the next station. At the end of the line, orders are separated into completed and incomplete queues based on whether all requested items were filled.
+This project simulates an assembly line that processes customer orders through a chain of workstations. Each workstation manages one inventory item, assigns serial numbers, fills matching order items when stock is available, and passes the order to the next station.
+
+At the end of the line, orders are separated into completed and incomplete queues based on whether all requested items were filled.
 
 ## Features
 
@@ -46,6 +48,10 @@ Open `Project/Project.sln` in Visual Studio and run the project with the followi
 The expected final milestone output is included in:
 
     Project/ms3_output.txt
+
+## Academic Context
+
+This project was completed as the final project for Seneca College's OOP345 course, focused on object-oriented programming in C++.
 
 ## Resume Summary
 
